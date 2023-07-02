@@ -1,6 +1,6 @@
-#Backend of the project
+# Backend of the project
 
-##Configuration and requiered packages
+## Configuration and requiered packages
 
 In this backend we are using MongoDB (mongoose) 
 
