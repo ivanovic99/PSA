@@ -2,7 +2,15 @@
 
 ## Configuration and requiered packages
 
-In this backend we are using MongoDB (mongoose) 
+In this backend we are using MongoDB (mongoose) and Node.js to build and run it.
+If you want to try it in your local you'll need to have them installed in your computer. Here are a couple of videos that might help you get it done (they are meant for Linux Ubuntu OS):
+Install Node.js: https://www.youtube.com/watch?v=KtTe_ckT3iM
+Install MongoDB: https://www.youtube.com/watch?v=HSIh8UswVVY
+
+
+Once you have the prerequisites mentioned above, you'll be able to run this project following this commands:
+
+
 
 
 
