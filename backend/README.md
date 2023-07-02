@@ -1,3 +1,13 @@
+#Backend of the project
+
+##Configuration and requiered packages
+
+In this backend we are using MongoDB (mongoose) 
+
+
+
+
+
 #Esqueleto basico de un Back-End con MongoDB
 
 Es un proyecto que tiene como objetivo ser el punto de partida para futuros proyectos.
