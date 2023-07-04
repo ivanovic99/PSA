@@ -1,6 +1,33 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken')
 
+
+async function signupUser(req, res) {
+   res.json({
+      message: 'Signup successful. Welcome ' + req.user.username  + '!',
+   });
+}
+
+async function loginUser(req, res, next, err, user, info) {
+   try {
+      if (err || !user) {
+         console.log("err ----->", err);
+         var myErrorMessage = info ? info.message : err;
+         console.log("myErrorMeessage ----->", myErrorMessage);
+         const error = new Error(myErrorMessage);
+         return next(error);
+      }
+      req.login(user, { session: false }, async (error) => {
+         if (error) return next(error)
+         const body = { _id: user._id, email: user.email, username: user.username };
+         const token = jwt.sign({ user: body }, process.env.JWT_SECRET);
+         return res.json({ token });
+      });
+   } catch (error) {
+      return next(error);
+   }
+}
+
 async function getUserById(req, res) {
    try {
       const userId = req.user._id;
@@ -12,32 +39,6 @@ async function getUserById(req, res) {
    } catch (error) {
       console.error('Error when fetching user:', error);
       res.status(500).json({ error: 'Error when fetching user' });
-   }
-}
-
-async function signupUser(req, res) {
-   console.log(req.user.token);
-   res.json({
-      message: 'Signup successful. Welcome ' + req.user.username  + '!',
-   });
-}
-
-async function loginUser(req, res, next, err, user, info) {
-   try {
-      if (err || !user) {
-         console.log(err);
-         console.log(info.message);
-         const error = new Error(info.message);
-         return next(error);
-      }
-      req.login(user, { session: false }, async (error) => {
-         if (error) return next(error)
-         const body = { _id: user._id, email: user.email, username: user.username };
-         const token = jwt.sign({ user: body }, process.env.JWT_SECRET);
-         return res.json({ token });
-      });
-   } catch (error) {
-      return next(error);
    }
 }
 

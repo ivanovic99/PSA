@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+require('dotenv').config();
 
-var options = {discriminatorKey: 'type'};
+var options = { collection: "users" , discriminatorKey: 'type' };
 
 const UserSchema = new mongoose.Schema({
    
@@ -33,14 +34,16 @@ UserSchema.pre('save', function (next) {
 
    var user = this;
    if (!user.isModified('password') && !this.isNew) return next();
-
-   bcrypt.genSalt(process.env.SALT_WORK_FACTOR || 10, function (err, salt) {
+   
+   var mySalt = +process.env.SALT_WORK_FACTOR || 10;
+   bcrypt.genSalt(mySalt, function (err, salt) {
       if (err) return next(err);
 
       bcrypt.hash(user.password, salt, function (err, hash) {
          if (err) return next(err);
          user.password = hash;
          next();
+
       });
    });
 });

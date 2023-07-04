@@ -1,41 +1,41 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const Guest = require('./Guest');
+const User = require('./User');
+require('dotenv').config();
 
-var options = {discriminatorKey: 'type'};
+const AdminSchema = new mongoose.Schema({
+   adminKey: { type: String, required: true, unique: true, immutable: true },
+});
 
-const AdminSchema = Guest.discriminatorKey("Admin",
-   new mongoose.Schema({ adminKey: { type: String, required: true, unique: true, immutable: true }, }, options)) 
 
 AdminSchema.pre('save', function (next) {
    
+   if (this.isNew) {
       var admin = this;
-      
-      if (!admin.isModified('password') && !this.isNew) return next();
-      
-      if (this.isNew) admin.adminKey = bcrypt.hashSync(admin.adminKey, 10);
-   
-      bcrypt.genSalt(process.env.SALT_WORK_FACTOR || 10, function (err, salt) {
+
+      var mySalt = +process.env.SALT_WORK_FACTOR || 10;
+      bcrypt.genSalt(mySalt, function (err, salt) {
          if (err) return next(err);
    
-         bcrypt.hash(admin.password, salt, function (err, hash) {
+         bcrypt.hash(admin.adminKey, salt, function (err, hash) {
             if (err) return next(err);
-            admin.password = hash;
+            admin.adminKey = hash;
             next();
          });
       });
-   });
+   }
 
-AdminSchema.methods.isValidPassword = async function (password) {
+});
+
+
+AdminSchema.methods.isValidPasswordAndKey = async function (password, adminKey) {
    const admin = this;
-   const compare = await bcrypt.compare(password, admin.password);
-   return compare;
+   const compareKey = await bcrypt.compare(adminKey, admin.adminKey);
+   const comparePassword = await bcrypt.compare(password, admin.password);
+   return compareKey && comparePassword;
 }
 
-AdminSchema.methods.isValidAdminKey = async function (adminKey) {
-   const admin = this;
-   const compare = await bcrypt.compare(adminKey, admin.adminKey);
-   return compare;
-}
+const Admin = User.discriminator("Admin",
+   AdminSchema); 
 
-module.exports = mongoose.model('Admin', AdminSchema);
+module.exports = Admin;

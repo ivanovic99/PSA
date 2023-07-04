@@ -1,9 +1,46 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const Admin = require('../app/models/Admin');
 const User = require('../app/models/User');
 const JWTStrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 require('dotenv').config();
+
+
+passport.use('signupAdmin', new LocalStrategy({
+   passReqToCallback: true
+   }, async (req, username, password, done) => {
+      try {
+         const { email, password, adminKey, username, name, lastname, age, nationality, adress, phone } = req.body;
+         const admin = await Admin.create({ email, password, adminKey, username, name, lastname, age, nationality, adress, phone });
+         admin.save({ bufferTimeoutMS: 10000 });
+         return done(null, admin);
+      } catch (error) {
+         done(error);
+      }
+}));
+
+passport.use('loginAdmin', new LocalStrategy({
+   passReqToCallback: true
+   }, async (req, username, password, done) => {
+      password = req.body.password;
+      username = req.body.username;
+      const email = req.body.email;
+      const adminKey = req.body.adminKey;
+      try {
+         const admin = email == "undefined" ? await Admin.findOne({ username }) : await Admin.findOne({ email });
+         if (!admin) {
+            return done(null, false, { message: 'Admin not found' });
+         }
+         const validatePasswordAndKey = await admin.isValidPasswordAndKey(password, adminKey);
+         if (!validatePasswordAndKey) {
+            return done(null, false, { message: 'Wrong Password or Key' });
+         }
+         return done(null, admin, { message: 'Logged in Successfully' });
+      } catch (error) {
+         return done(error);
+      }
+}));
 
 
 passport.use('signupUser', new LocalStrategy({
