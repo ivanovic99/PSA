@@ -1,0 +1,34 @@
+{
+   "name": "Backend PSA",
+   "version": "1.0.0",
+   "description": "Backend for the project PSA",
+   "main": "index.js",
+   "scripts": {
+      "test": "npm test",
+      "start": "nodemon index.js",
+      "clean": "rm -rf node_modules"
+   },
+   "repository": "git+ssh://git@github.com/ivanovic99/PSA.git",
+   "author": "Ivan Erlich",
+   "license": "ISC",
+   "bugs": {
+      "url": "https://github.com/ivanovic99/PSA/issues"
+   },
+   "homepage": "https://github.com/ivanovic99/PSA#readme",
+   "dependencies": {
+      "bcrypt": "^5.1.0",
+      "cors": "^2.8.5",
+      "dotenv": "^16.3.1",
+      "express": "^4.18.2",
+      "express-session": "^1.17.3",
+      "jsonwebtoken": "^9.0.0",
+      "mongodb": "^5.6.0",
+      "mongoose": "^7.3.1",
+      "passport": "^0.6.0",
+      "passport-jwt": "^4.0.1",
+      "passport-local": "^1.0.0"
+   },
+   "devDependencies": {
+      "nodemon": "^2.0.22"
+   }
+}
