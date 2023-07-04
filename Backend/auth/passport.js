@@ -6,20 +6,20 @@ const ExtractJWT = require('passport-jwt').ExtractJwt;
 require('dotenv').config();
 
 
-passport.use('signup', new LocalStrategy({
+passport.use('signupUser', new LocalStrategy({
    passReqToCallback: true
    }, async (req, username, password, done) => {
       try {
          const { email, password, username, name, lastname, age, nationality, adress, phone } = req.body;
          const user = await User.create({ email, password, username, name, lastname, age, nationality, adress, phone });
-         user.save();
+         user.save({ bufferTimeoutMS: 10000 });
          return done(null, user);
       } catch (error) {
          done(error);
       }
 }));
 
-passport.use('login', new LocalStrategy({
+passport.use('loginUser', new LocalStrategy({
    passReqToCallback: true
    }, async (req, username, password, done) => {
       password = req.body.password;

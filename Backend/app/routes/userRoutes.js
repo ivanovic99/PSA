@@ -6,36 +6,13 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config();
 
 
-// This two routes (signup and login) should probably be in a different file
-
 // Sign up a new user
-router.post('/signup', passport.authenticate('signup', { session: false }), async (req, res) => {
-   res.json({
-      message: 'Signup successful ' + req.user.password,
-      user: req.user
-   });
-   // res.send("ok");
-});
+router.post('/signup', passport.authenticate('signupUser', { session: false }), userController.signupUser);
 
 // Login
 router.post('/login', async (req, res, next) => {
-   passport.authenticate('login', async (err, user, info) => {
-      try {
-         if (err || !user) {
-            console.log(err);
-            console.log(info.message);
-            const error = new Error(info.message);
-            return next(error);
-         }
-         req.login(user, { session: false }, async (error) => {
-            if (error) return next(error)
-            const body = { _id: user._id, email: user.email, username: user.username };
-            const token = jwt.sign({ user: body }, process.env.JWT_SECRET);
-            return res.json({ token });
-         });
-      } catch (error) {
-         return next(error);
-      }
+   passport.authenticate('loginUser', async (err, user, info) => {
+      userController.loginUser(req, res, next, err, user, info);
    })(req, res, next);
 });
 
