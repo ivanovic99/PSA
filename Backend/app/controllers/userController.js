@@ -3,7 +3,7 @@ const User = require('../models/User');
 async function getUserById(req, res) {
    try {
       const userId = req.user._id;
-      const user = User.findById(userId);
+      const user = await User.findById(userId, "-password").lean();
       if (!user) {  
          return res.status(404).json({ error: 'User not found' });
       }

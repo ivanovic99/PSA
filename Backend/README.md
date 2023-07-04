@@ -10,6 +10,15 @@ Install MongoDB: https://www.youtube.com/watch?v=HSIh8UswVVY
 
 Once you have the prerequisites mentioned above, you'll be able to run this project following this commands:
 
+// explain .env
+
+// explain npm install
+
+// explain sudo mongod
+
+// explain npm start
+
+## Project structure
 
 
 
