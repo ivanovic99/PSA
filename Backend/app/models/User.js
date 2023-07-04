@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
+var options = {discriminatorKey: 'type'};
+
 const UserSchema = new mongoose.Schema({
    
    email: { type: String, required: true, unique: true },
@@ -20,10 +22,12 @@ const UserSchema = new mongoose.Schema({
    adress: { type: String, required: false },
    
    phone: [{ type: String, required: false }],
+
+   createdAt: { type: Date, default: Date.now },
    
    // gender: { type: String, required: false },
    
-});
+}, options);
 
 UserSchema.pre('save', function (next) {
 
