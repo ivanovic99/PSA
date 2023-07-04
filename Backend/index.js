@@ -31,7 +31,6 @@ async function startServer() {
    app.use(middlewares.urlencoded);
    app.use(middlewares.bodyParser);
    // app.use(middlewares.cors);
-   // app.use(middlewares.verifyAuthentication);
 
    app.use('/api', routes);
 

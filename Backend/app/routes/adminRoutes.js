@@ -18,8 +18,11 @@ router.post('/login', async (req, res, next) => {
 });
 
 
+// From now on, we should authenticate with jwt each time there is a request to the server
+router.use(passport.authenticate('jwt', { session: false }));
+
 // Get admin by ID
-router.get('/:id', passport.authenticate('jwt', { session: false }), adminController.getAdminById);
+router.get('/:id', adminController.getAdminById);
 
 // // Get all users
 // router.get('/', userController.getAllUsers);
