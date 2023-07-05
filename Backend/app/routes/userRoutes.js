@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
-const passport = require('../../auth/passport')
-const jwt = require('jsonwebtoken')
+const passport = require('../../auth/passport');
+const clientRoutes = require('./clientRoutes');
 require('dotenv').config();
 
 
@@ -22,20 +22,11 @@ router.use(passport.authenticate('jwt', { session: false }));
 // Get user by ID
 router.get('/:id', userController.getUserById);
 
-// // Get all users
-// router.get('/', userController.getAllUsers);
+// User routes only for the user model...
 
-// // Ruta para obtener todos los tickets
-// router.get('/', ticketController.getAllTickets);
 
-// // Ruta para obtener un ticket por su ID
-// router.get('/:id', ticketController.getTicketById);
-
-// // Ruta para actualizar un ticket por su ID
-// router.put('/:id', ticketController.updateTicketById);
-
-// // Ruta para eliminar un ticket por su ID
-// router.delete('/:id', ticketController.deleteTicketById);
+// Client routes
+router.use('/:id/clients', clientRoutes);
 
 
 module.exports = router;

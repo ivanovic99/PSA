@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 
-var options = { collection: "users" , discriminatorKey: 'type' };
+var options = { collection: "Users" , discriminatorKey: 'type' };
 
 const UserSchema = new mongoose.Schema({
    

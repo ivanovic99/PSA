@@ -21,7 +21,7 @@ async function loginAdmin(req, res, next, err, user, info) {
          if (error) return next(error)
          const body = { _id: user._id, email: user.email, username: user.username };
          const token = jwt.sign({ user: body }, process.env.JWT_SECRET);
-         return res.json({ token });
+         return res.json({ token, id: user._id });
       });
    } catch (error) {
       return next(error);

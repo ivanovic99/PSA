@@ -42,6 +42,8 @@ npm start
 
 // explain npm start
 
+// clarify that in the frontend, a parameter called "secret_token" needs to be added to the headers in order to make the requests to the backend and that this parameter needs to have the value of the JWT token that is generated when the user logs in.
+
 ## Project structure
 
 
