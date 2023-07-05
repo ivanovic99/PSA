@@ -21,6 +21,10 @@ const ClientSchema = new mongoose.Schema({
    city: { type: String, required: true },
 
    address: { type: String, required: true },
+
+   productsVersion: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Version' }],
+
+   // add tickets association
    
 }, options);
 
