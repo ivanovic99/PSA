@@ -2,7 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const connectToDatabase = require("./config/db");
 const passport = require('passport');
-const middlewares = require('./config/middlewares');
+const middlewares = require('./config/protocolMiddlewares');
 const routes = require('./app/routes/index');
 require('dotenv').config();
 
