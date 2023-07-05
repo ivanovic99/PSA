@@ -14,20 +14,21 @@ async function addClient(req, res) {
 
    const { CUIL, name, email, phone, country, city, address } = req.body;
 
-   const client = new Client({
-      CUIL: CUIL,
-      name: name,
-      email: email,
-      phone: phone,
-      country: country,
-      city: city,
-      address: address,
-   });
    try {
+      const client = await Client.create({
+         CUIL: CUIL,
+         name: name,
+         email: email,
+         phone: phone,
+         country: country,
+         city: city,
+         address: address,
+      });
       const savedClient = await client.save();
       res.json(savedClient);
    } catch (err) {
-      res.json({ message: err });
+      console.log(err);
+      res.json({ message: "Error", err });
    }
 }
 
