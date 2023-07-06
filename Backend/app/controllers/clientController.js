@@ -36,7 +36,7 @@ async function getClientById(req, res) {
    try {
       const { id } = req.params;
       if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-         console.log("Invalid ID");
+         console.log("Invalid ID for client");
          return res.json({ message: "Client not found" });
      }
       const client = await Client.findById(id);
