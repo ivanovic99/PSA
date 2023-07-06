@@ -1,4 +1,4 @@
-const mongoose = requiere("mongoose");
+const mongoose = require("mongoose");
 
 var options = { collection: "Versions" };
 

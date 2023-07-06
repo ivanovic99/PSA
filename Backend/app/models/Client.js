@@ -29,4 +29,41 @@ const ClientSchema = new mongoose.Schema({
 }, options);
 
 
+ClientSchema.methods.addProductVersion = async function (version) {
+   try {
+      this.productsVersion.push(version);
+      await this.save();
+      return this;
+   } catch(error) {
+      console.log(error);
+      throw new Error(error);
+   }
+}
+
+ClientSchema.methods.removeProductVersion = async function (version) {
+   try {
+      this.productsVersion.pull(version);
+      await this.save();
+      return this;
+   } catch(error) {
+      console.log(error);
+      throw new Error(error);
+   }
+}
+
+ClientSchema.method.editProductVersion = async function (oldVersion, newVersion) {
+   try {
+      this.productsVersion.pull(oldVersion);
+      this.productsVersion.push(newVersion);
+      await this.save();
+      return this;
+   } catch(error) {
+      console.log(error);
+      throw new Error(error);
+   }
+}
+
+
+
+
 module.exports = mongoose.model('Client', ClientSchema);
