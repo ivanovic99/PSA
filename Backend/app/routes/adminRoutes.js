@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const adminController = require('../controllers/adminController');
 const passport = require('../../auth/passport')
-const clientRoutes = require('./clientRoutes');
+const { isAdmin } = require('../../auth/adminAuth')
 require('dotenv').config();
 
 
@@ -21,21 +21,23 @@ router.post('/login', async (req, res, next) => {
 // From now on, we should authenticate with jwt each time there is a request to the server
 router.use(passport.authenticate('jwt', { session: false }));
 
+router.use(isAdmin);
 
-// Admin routes only for the admin model...
 // Get all admins
+router.get('/', adminController.getAllAdmins);
+
+// Ger all users
+router.get('/users', adminController.getAllUsers);
+
 // Get admin by ID
 router.get('/:id', adminController.getAdminById);
-// Edit admin by ID
-// Delete admin by ID
-// Get all users
-// Get admin by ID
-// Get user by ID
-// Edit user by ID
-// Delete user by ID
-// Etc...
 
-// Client routes
-router.use('/:id/clients', clientRoutes);
+// Edit admin by ID
+router.put('/:id', adminController.updateAdminById);
+
+// Delete admin by ID
+router.delete('/:id', adminController.deleteAdminById);
+
+
 
 module.exports = router;

@@ -1,4 +1,5 @@
 const Admin = require('../models/Admin');
+const User = require('../models/User');
 const jwt = require('jsonwebtoken')
 
 
@@ -31,6 +32,9 @@ async function loginAdmin(req, res, next, err, user, info) {
 async function getAdminById(req, res) {
    try {
       const adminId = req.user._id;
+      if (req.params.id !== adminId) {
+         return res.status(401).json({ error: 'Unauthorized' });
+      }
       const admin = await Admin.findById(adminId, "-password -adminKey").lean();
       if (!admin) {  
          return res.status(404).json({ error: 'admin not found' });
@@ -42,9 +46,82 @@ async function getAdminById(req, res) {
    }
 }
 
+async function getAllAdmins(req, res) {
+   try {
+      const admins = await Admin.find({}, "-password -adminKey").lean();
+      res.status(200).json(admins);
+   } catch (error) {
+      console.error('Error when fetching admins:', error);
+      res.status(500).json({ error: 'Error when fetching admins' });
+   }
+}
+
+async function updateAdminById(req, res) {
+   try {
+      const adminId = req.user._id;
+      if (req.params.id !== adminId) {
+         return res.status(401).json({ error: 'Unauthorized' });
+      }
+      const { username, email, adminKey, password, name, lastname, age, nationality, address, phone } = req.body;
+      const updateAdminById = await Admin.findByIdAndUpdate(adminId, 
+            {
+               username,
+               email,
+               adminKey,
+               password,
+               name,
+               lastname,
+               age,
+               nationality,
+               address,
+               phone,
+            },
+            { new: true },
+         ).lean();
+      if (!updateAdminById) {
+         return res.status(404).json({ error: 'admin not found' });
+      }
+      res.status(200).json(updateAdminById);
+   } catch (error) {
+      console.error('Error when updating admin:', error);
+      res.status(500).json({ error: 'Error when updating admin' });
+   }
+}
+
+async function deleteAdminById(req, res) {
+   try {
+      const adminId = req.user._id;
+      if (req.params.id !== adminId) {
+         return res.status(401).json({ error: 'Unauthorized' });
+      }
+      const deletedAdmin = await Admin.findByIdAndDelete(adminId).lean();
+      if (!deletedAdmin) {
+         return res.status(404).json({ error: 'admin not found' });
+      }
+      res.status(200).json(deletedAdmin);
+   } catch (error) {
+      console.error('Error when deleting admin:', error);
+      res.status(500).json({ error: 'Error when deleting admin' });
+   }
+}
+
+async function getAllUsers(req, res) {
+   try {
+      const users = await User.find({ __t: { $nin: ['Admin'] } }, "-password").lean();
+      res.status(200).json(users);
+   } catch (error) {
+      console.error('Error when fetching users:', error);
+      res.status(500).json({ error: 'Error when fetching users' });
+   }
+}
+
 
 module.exports = {
    getAdminById,
    loginAdmin,
    signupAdmin,
+   getAllAdmins,
+   updateAdminById,
+   deleteAdminById,
+   getAllUsers,
 };

@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 const passport = require('../../auth/passport');
-const clientRoutes = require('./clientRoutes');
 require('dotenv').config();
 
 
@@ -22,11 +21,12 @@ router.use(passport.authenticate('jwt', { session: false }));
 // Get user by ID
 router.get('/:id', userController.getUserById);
 
-// User routes only for the user model...
+// Update user by ID
+router.put('/:id', userController.updateUserById);
 
+// Delete user by ID
+router.delete('/:id', userController.deleteUserById);
 
-// Client routes
-router.use('/:id/clients', clientRoutes);
 
 
 module.exports = router;

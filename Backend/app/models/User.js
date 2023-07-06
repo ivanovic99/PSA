@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 
-var options = { collection: "Users" , discriminatorKey: 'type' };
+var options = { collection: "Users" };
 
 const UserSchema = new mongoose.Schema({
    
@@ -39,9 +39,9 @@ UserSchema.pre('save', function (next) {
    bcrypt.genSalt(mySalt, function (err, salt) {
       if (err) return next(err);
 
-      bcrypt.hash(user.password, salt, function (err, hash) {
+      bcrypt.hash(user.password, salt, function (err, passwordHash) {
          if (err) return next(err);
-         user.password = hash;
+         user.password = passwordHash;
          next();
 
       });
