@@ -19,7 +19,7 @@ const ProductSchema = new mongoose.Schema({
 
 ProductSchema.methods.addVersion = async function (customization) {
    try {
-      const version = await Version.create({ customization });
+      const version = await Version.create({ customization, product: this._id });
       version.save();
       this.versions.push(version);
       await this.save();
@@ -29,16 +29,13 @@ ProductSchema.methods.addVersion = async function (customization) {
    }
 }
 
-ProductSchema.pre("findByIdAndDelete", async function (next) {
-   try {
-      this.versions.forEach(async (version) => {
-         await Version.findByIdAndDelete(version._id);
+ProductSchema.post("findOneAndDelete", async function(deletedProduct, next) {
+   if (deletedProduct) {
+      await Version.deleteMany({
+         product: deletedProduct._id
       });
-      next();
-   } catch(error) {
-      console.log(error);
-      throw new Error(error);
    }
-});
+   next();
+ });
 
 module.exports = mongoose.model('Product', ProductSchema);

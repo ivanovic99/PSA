@@ -4,7 +4,7 @@ var options = { collection: "Versions" };
 
 const VersionSchema = new mongoose.Schema({
 
-   versionNumber: { type: Number, required: true },
+   versionNumber: { type: String, default: "1.0.0", required: true },
    
    customization: { type: String, required: true },
    
@@ -12,7 +12,7 @@ const VersionSchema = new mongoose.Schema({
    
    updatedAt: { type: Date, default: Date.now },
    
-   products: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+   product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
 
    clients: [{ type: mongoose.Schema.Types.ObjectId, ref: "Client" }],
 
