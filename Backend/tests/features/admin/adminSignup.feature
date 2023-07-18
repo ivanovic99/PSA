@@ -8,7 +8,7 @@ Feature: Admin Signup
 
       Examples:
          | admin | message |
-         | testing admin | Signup successful. Welcome admin testing admin! |
+         | testing admin   | Signup successful. Welcome admin testing admin! |
          | testing admin 2 | Signup successful. Welcome admin testing admin 2! |
          # etc...
 
@@ -19,6 +19,6 @@ Feature: Admin Signup
 
       Examples:
          | admin |
-         | testing admin |
+         | testing admin   |
          | testing admin 2 |
          # etc...
