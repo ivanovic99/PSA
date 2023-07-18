@@ -55,12 +55,6 @@ To run the tests, you'll need to run the following command in the root folder of
 npm test
 ```
 
-To clean the database after running the tests, you'll need to run the following command in the root folder of the project:
-```
-npm run cleanTest
-```
-
-
 
 #Esqueleto basico de un Back-End con MongoDB
 

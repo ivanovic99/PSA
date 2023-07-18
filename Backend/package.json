@@ -4,10 +4,9 @@
    "description": "Backend for the project PSA",
    "main": "index.js",
    "scripts": {
-      "test": "cd tests && npx cucumber-js ./features --require ./step_definitions",
+      "test": "cd tests && node clean.js && npx cucumber-js ./features --require ./step_definitions",
       "start": "nodemon index.js",
-      "clean": "rm -rf node_modules",
-      "cleanTest": "node tests/clean.js"
+      "clean": "rm -rf node_modules"
    },
    "repository": "git+ssh://git@github.com/ivanovic99/PSA.git",
    "author": "Ivan Erlich",
