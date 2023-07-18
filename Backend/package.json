@@ -4,7 +4,7 @@
    "description": "Backend for the project PSA",
    "main": "index.js",
    "scripts": {
-      "test": "npm test",
+      "test": "cd tests && npx cucumber-js",
       "start": "nodemon index.js",
       "clean": "rm -rf node_modules"
    },
@@ -16,6 +16,7 @@
    },
    "homepage": "https://github.com/ivanovic99/PSA#readme",
    "dependencies": {
+      "axios": "^1.4.0",
       "bcrypt": "^5.1.0",
       "body-parser": "^1.20.2",
       "cors": "^2.8.5",
@@ -31,6 +32,7 @@
       "passport-local": "^1.0.0"
    },
    "devDependencies": {
+      "@cucumber/cucumber": "^9.3.0",
       "nodemon": "^2.0.22"
    }
 }
