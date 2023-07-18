@@ -12,29 +12,34 @@ const AdminSchema = extendSchema(User.schema, {
 }, options);
 
 
-AdminSchema.pre('save', function (next) {
+AdminSchema.pre('save', async function (next) {
    
-   if (this.isNew || this.isModified('adminKey') || this.isModified('password')) {
-      var admin = this;
+   if (!this.isNew) return next();
 
-      var mySalt = +process.env.SALT_WORK_FACTOR || 10;
-      bcrypt.genSalt(mySalt, function (err, salt) {
-         if (err) return next(err);
-   
-         bcrypt.hash(admin.adminKey, salt, function (err, adminKeyHash) {
-            if (err) return next(err);
-            admin.adminKey = adminKeyHash;
-            bcrypt.hash(admin.password, salt, function (err, passwordHash) {
-               if (err) return next(err);
-               admin.password = passwordHash;
-               next();
-            });
-         });
-      });
+   var admin = this;
+   try {
+      admin.password = await hashPasswordKey(admin.password);
+      admin.adminKey = await hashPasswordKey(admin.adminKey);
+      next();
+   } catch (error) {
+      return next(error);
    }
-
 });
 
+AdminSchema.pre('findOneAndUpdate', async function (next) {
+   var admin = this;
+   try {
+      if (admin._update.password) {
+        admin._update.password = await hashPasswordKey(admin._update.password); 
+      }
+      if (admin._update.adminKey) {
+         admin._update.adminKey = await hashPasswordKey(admin._update.adminKey);
+      }
+      next();
+   } catch (error) {
+      return next(error);
+   }
+});
 
 AdminSchema.methods.isValidPasswordAndKey = async function (password, adminKey) {
    const admin = this;
@@ -44,3 +49,14 @@ AdminSchema.methods.isValidPasswordAndKey = async function (password, adminKey) 
 }
 
 module.exports = mongoose.model('Admin', AdminSchema);
+
+
+
+async function hashPasswordKey(passwordKey) {
+   var mySalt = +process.env.SALT_WORK_FACTOR || 10;
+   var err, salt = await bcrypt.genSalt(mySalt);
+   if (err) throw (err);
+   var err, passwordKeyHash = await bcrypt.hash(passwordKey, salt);
+   if (err) throw (err);
+   return passwordKeyHash;
+}
