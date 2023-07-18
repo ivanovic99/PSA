@@ -1,4 +1,3 @@
-const { populate } = require('../models/Client');
 const Product = require('../models/Product');
 
 // Get all products
@@ -16,7 +15,7 @@ async function addProduct(req, res) {
    try {
       const { name, description, customization } = req.body;
       const product = await Product.create({ name, description });
-      const updatedProduct = await product.addVersion(customization);
+      const updatedProduct = await product.addVersion("1.0.0", customization);
       res.status(201).json({ newProduct: updatedProduct });
    } catch (error) {
       res.status(500).json({ message: error.message });

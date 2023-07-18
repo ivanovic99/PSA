@@ -17,17 +17,34 @@ const ProductSchema = new mongoose.Schema({
 
 }, options);
 
-ProductSchema.methods.addVersion = async function (customization) {
+ProductSchema.methods.addVersion = async function (versionNumber, customization) {
    try {
-      const version = await Version.create({ customization, product: this._id });
+      var product = this;
+      const version = await Version.create({ versionNumber, customization, product: product._id });
       version.save();
-      this.versions.push(version);
-      await this.save();
-      return this;
+      product.versions.push(version);
+      await product.save();
+      return product;
    } catch(error) {
       console.log(error);
    }
 }
+
+ProductSchema.methods.removeVersion = async function (versionId) {
+   try {
+      const version = await Version.findByIdAndDelete(versionId);
+      if (!version) {
+         throw new Error('Version not found');
+      }
+      this.versions.pull(version);
+      await this.save();
+      return this;
+   } catch(error) {
+      console.log(error);
+      throw new Error('Version not found');
+   }
+}
+
 
 ProductSchema.post("findOneAndDelete", async function(deletedProduct, next) {
    if (deletedProduct) {
