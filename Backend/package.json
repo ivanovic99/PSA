@@ -4,7 +4,7 @@
    "description": "Backend for the project PSA",
    "main": "index.js",
    "scripts": {
-      "test": "cd tests && node clean.js && npx cucumber-js ./features --require ./step_definitions",
+      "test": "cd tests && node clean.js && npx cucumber-js ./features --require ./step_definitions --require hooks.js",
       "start": "nodemon index.js",
       "clean": "rm -rf node_modules"
    },
