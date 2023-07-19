@@ -1,5 +1,5 @@
 {
-   "name": "Backend PSA",
+   "name": "backend-psa",
    "version": "1.0.0",
    "description": "Backend for the project PSA",
    "main": "index.js",
