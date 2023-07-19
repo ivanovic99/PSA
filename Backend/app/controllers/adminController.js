@@ -80,7 +80,7 @@ async function updateAdminById(req, res) {
       if (!updateAdminById) {
          return res.status(404).json({ error: 'admin not found' });
       }
-      res.status(200).json(updateAdminById);
+      res.status(200).json({ updateAdminById, message: 'Admin updated successfully' });
    } catch (error) {
       console.error('Error when updating admin:', error);
       res.status(500).json({ error: 'Error when updating admin' });
