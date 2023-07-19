@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+require('dotenv').config();
+
+var options = { collection: "Users" };
 
 const UserSchema = new mongoose.Schema({
    
@@ -20,27 +23,38 @@ const UserSchema = new mongoose.Schema({
    adress: { type: String, required: false },
    
    phone: [{ type: String, required: false }],
+
+   createdAt: { type: Date, default: Date.now },
    
    // gender: { type: String, required: false },
    
-});
+}, options);
 
-UserSchema.pre('save', function (next) {
+UserSchema.pre('save', async function (next) {
 
    var user = this;
-   if (!user.isModified('password') && !this.isNew) return next();
-
-   bcrypt.genSalt(process.env.SALT_WORK_FACTOR || 10, function (err, salt) {
-      if (err) return next(err);
-
-      bcrypt.hash(user.password, salt, function (err, hash) {
-         if (err) return next(err);
-         user.password = hash;
-         next();
-      });
-   });
+   if (!this.isNew) return next();
+   
+   try {
+      user.password = await hashPassword(user.password);
+      next();
+   } catch (error) { 
+      return next(error);
+   }
 });
 
+UserSchema.pre('findOneAndUpdate', async function (next) {
+   var user = this;
+   if (!user._update.password) {
+      return next();
+   }
+   try {
+      user._update.password = await hashPassword(user._update.password);
+      next();
+   } catch (error) { 
+      return next(error);
+   }
+});
 
 UserSchema.methods.isValidPassword = async function (password) {
    const user = this;
@@ -50,3 +64,14 @@ UserSchema.methods.isValidPassword = async function (password) {
 
 
 module.exports = mongoose.model('User', UserSchema);
+
+
+
+async function hashPassword(password) {
+   var mySalt = +process.env.SALT_WORK_FACTOR || 10;
+   var err, salt = await bcrypt.genSalt(mySalt);
+   if (err) throw (err);
+   var err, passwordHash = await bcrypt.hash(password, salt);
+   if (err) throw (err);
+   return passwordHash;
+}

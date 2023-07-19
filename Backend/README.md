@@ -10,10 +10,62 @@ Install MongoDB: https://www.youtube.com/watch?v=HSIh8UswVVY
 
 Once you have the prerequisites mentioned above, you'll be able to run this project following this commands:
 
+First of all, you'll need to create a .env file in the root folder of the project. This file will contain the environment variables that are needed to run the project. The variables that you'll need to add are the following:
+```
+PORT = <the_port_number_that_you_want>
+SESSION_SECRET = <your_session_secret>
+JWT_SECRET = <your_swt_secret>
+SALT_WORK_FACTOR = <the_salt_factor_number_that_pleases_you>
+MONGODB_URI = <your_mongo_uri>
+```
+
+In order to build and run the project, you'll need to install all the packages that are required to run the project. To do so, you'll need to run the following command in the root folder of the project:
+```
+npm install
+```
+
+Then, you'll need to run the MongoDB server. To do so, you'll need to run the following command in a new terminal:
+```
+sudo mongod
+```
+
+Finally, you'll need to run the project. To do so, you'll need to run the following command in the root folder of the project:
+```
+npm start
+```
 
 
 
+// explain npm install
 
+// explain sudo mongod
+
+// explain npm start
+
+// clarify that in the frontend, a parameter called "secret_token" needs to be added to the headers in order to make the requests to the backend and that this parameter needs to have the value of the JWT token that is generated when the user logs in.
+
+## Project structure
+
+
+
+## Testing
+
+To run the tests, first of all, you need to have a terminal running the MongoDB server. To do so, you'll need to run the following command in a new terminal:
+```
+sudo mongod
+```
+
+Then, you'll need to run the project. To do so, you'll need to open another terminal and run the following command in the root folder of the project:
+
+```
+npm start
+```
+
+Finally open one last terminal and being again in the root folder of the project, run the following command:
+
+```
+npm test
+```
 
 
 #Esqueleto basico de un Back-End con MongoDB
