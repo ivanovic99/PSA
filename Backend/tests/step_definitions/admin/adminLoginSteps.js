@@ -9,7 +9,7 @@ var numOfAdminTested = 0;
 
 Given("I have a valid {string} with valid credentials {string} {string} already created and I am not logged in", function (admin, password, adminKey) {
    this.admin = {};
-   this.admin.email = "email@" + admin + ".com";
+   this.admin.email = admin;
    this.admin.password = password;
    this.admin.adminKey = adminKey;
    this.admin.username = admin;
@@ -37,7 +37,7 @@ Then('I should get a success {string} a token and the ID of the admin', function
 
 Given("I have a valid {string} with invalid credentials {string} {string} already created and I am not logged in", function (admin, password, adminKey) {
    this.admin = {};
-   this.admin.email = "email@" + admin + ".com";
+   this.admin.email = admin;
    this.admin.password = password;
    this.admin.adminKey = adminKey;
    this.admin.username = admin;
