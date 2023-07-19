@@ -50,7 +50,19 @@ npm start
 
 ## Testing
 
-To run the tests, you'll need to run the following command in the root folder of the project:
+To run the tests, first of all, you need to have a terminal running the MongoDB server. To do so, you'll need to run the following command in a new terminal:
+```
+sudo mongod
+```
+
+Then, you'll need to run the project. To do so, you'll need to open another terminal and run the following command in the root folder of the project:
+
+```
+npm start
+```
+
+Finally open one last terminal and being again in the root folder of the project, run the following command:
+
 ```
 npm test
 ```
