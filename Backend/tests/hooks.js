@@ -3,16 +3,24 @@ const { Before, BeforeAll } = require('@cucumber/cucumber');
 const Admin = require('../app/models/Admin'); // Adjust the path as needed
 const axios = require('axios');
 
-BeforeAll({ tags: '@preLogin_createAdmin' }, async function () {
+BeforeAll(async function () {
+   try {
+      // Start the server
+   } catch (error) {
+      console.log("error -------->", error);
+   }
+});
+
+Before({ tags: '@preCreateAdmin' }, async function () {
    try {
       await axios.post('http://localhost:5000/api/admin/signup', {
-         "email": "email@" + "preLogin_createAdmin" + ".com",
+         "email": "email@" + "preCreateAdmin" + ".com",
      
         "password": "123",
      
         "adminKey": "321",
      
-        "username": "preLogin_createAdmin",
+        "username": "preCreateAdmin",
         
         "name": "{ type: String, required: false }",
         
@@ -26,8 +34,25 @@ BeforeAll({ tags: '@preLogin_createAdmin' }, async function () {
         
         "phone": "[{ type: String, required: false }]"
      });
-     console.log("Admin created!");
    } catch (error) {
-      console.log("error -------->", error);
+      // console.log("error -------->", error);
+   }
+});
+
+Before({ tags: '@preLoginAdmin' }, async function () {
+   try {
+      var data = await axios.post('http://localhost:5000/api/admin/login', {
+         "email": "email@" + "preCreateAdmin" + ".com",
+         "password": "123",
+     
+        "adminKey": "321",
+     
+        "username": "preCreateAdmin",
+   });
+   this.token = data.data.token;
+   this.id = data.data.id;
+
+   } catch (error) {
+      // console.log("error -------->", error);
    }
 });
