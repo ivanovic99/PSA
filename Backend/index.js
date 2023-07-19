@@ -17,7 +17,7 @@ async function startServer() {
    const app = express();
    
    app.use(session({
-      secret: process.env.SESSION_SECRET,
+      secret: process.env.SESSION_SECRET || "my_secret_session",
       resave: false,
       saveUninitialized: false
     }))
@@ -42,3 +42,5 @@ async function startServer() {
 }
 
 startServer();
+
+module.exports = startServer;

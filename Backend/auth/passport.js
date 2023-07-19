@@ -93,7 +93,7 @@ passport.deserializeUser(async (id, done) => {
 
 
 passport.use(new JWTStrategy({
-   secretOrKey: process.env.JWT_SECRET,
+   secretOrKey: process.env.JWT_SECRET || "my_secret_jwt",
    jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token')
 }, async (token, done) => {
       try {
