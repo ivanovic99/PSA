@@ -21,7 +21,7 @@ async function loginUser(req, res, next, err, user, info) {
          if (error) return next(error)
          const body = { _id: user._id, email: user.email, username: user.username };
          const token = jwt.sign({ user: body }, process.env.JWT_SECRET);
-         return res.json({ token });
+         return res.json({ token, id: user._id });
       });
    } catch (error) {
       return next(error);
@@ -31,6 +31,9 @@ async function loginUser(req, res, next, err, user, info) {
 async function getUserById(req, res) {
    try {
       const userId = req.user._id;
+      if (req.params.id !== userId) {
+         return res.status(401).json({ error: 'Unauthorized' });
+      }
       const user = await User.findById(userId, "-password").lean();
       if (!user) {  
          return res.status(404).json({ error: 'User not found' });
@@ -42,11 +45,62 @@ async function getUserById(req, res) {
    }
 }
 
+async function updateUserById(req, res) {
+   try {
+      const userId = req.user._id;
+      if (req.params.id !== userId) {
+         return res.status(401).json({ error: 'Unauthorized' });
+      }
+      const { username, email, password, name, lastname, age, nationality, address, phone } = req.body;
+      const updatedUser = await User.findByIdAndUpdate(userId,
+            {
+               username,
+               email,
+               password,
+               name,
+               lastname,
+               age,
+               nationality,
+               address,
+               phone,
+            },
+            { new: true },
+         );
+      if (!updatedUser) {
+         return res.status(404).json({ error: 'User not found' });
+      }
+      res.status(200).json(updatedUser);
+   } catch(error) {
+      console.error('Error when updating user:', error);
+      res.status(500).json({ error: 'Error when updating user' });
+   }
+}
+
+async function deleteUserById(req, res) {
+   try {
+      const userId = req.user._id;
+      if (req.params.id !== userId) {
+         return res.status(401).json({ error: 'Unauthorized' });
+      }
+      const deletedUser = await User.findByIdAndDelete(userId);
+      if (!deletedUser) {
+         return res.status(404).json({ error: 'User not found' });
+      }
+      res.status(200).json({ message: 'User deleted successfully' });
+   } catch (error) {
+      console.error('Error when deleting user:', error);
+      res.status(500).json({ error: 'Error when deleting user' });
+   }
+}
+
+
 
 module.exports = { 
    getUserById,
    signupUser,
    loginUser,
+   updateUserById,
+   deleteUserById,
 };
 
 

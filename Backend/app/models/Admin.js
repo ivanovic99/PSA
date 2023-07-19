@@ -2,31 +2,44 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const User = require('./User');
 require('dotenv').config();
+const extendSchema = require('mongoose-extend-schema');
 
-const AdminSchema = new mongoose.Schema({
+
+const options = { collection: 'Admin' };
+
+const AdminSchema = extendSchema(User.schema, {
    adminKey: { type: String, required: true, unique: true, immutable: true },
-});
+}, options);
 
 
-AdminSchema.pre('save', function (next) {
+AdminSchema.pre('save', async function (next) {
    
-   if (this.isNew) {
-      var admin = this;
+   if (!this.isNew) return next();
 
-      var mySalt = +process.env.SALT_WORK_FACTOR || 10;
-      bcrypt.genSalt(mySalt, function (err, salt) {
-         if (err) return next(err);
-   
-         bcrypt.hash(admin.adminKey, salt, function (err, hash) {
-            if (err) return next(err);
-            admin.adminKey = hash;
-            next();
-         });
-      });
+   var admin = this;
+   try {
+      admin.password = await hashPasswordKey(admin.password);
+      admin.adminKey = await hashPasswordKey(admin.adminKey);
+      next();
+   } catch (error) {
+      return next(error);
    }
-
 });
 
+AdminSchema.pre('findOneAndUpdate', async function (next) {
+   var admin = this;
+   try {
+      if (admin._update.password) {
+        admin._update.password = await hashPasswordKey(admin._update.password); 
+      }
+      if (admin._update.adminKey) {
+         admin._update.adminKey = await hashPasswordKey(admin._update.adminKey);
+      }
+      next();
+   } catch (error) {
+      return next(error);
+   }
+});
 
 AdminSchema.methods.isValidPasswordAndKey = async function (password, adminKey) {
    const admin = this;
@@ -35,7 +48,15 @@ AdminSchema.methods.isValidPasswordAndKey = async function (password, adminKey) 
    return compareKey && comparePassword;
 }
 
-const Admin = User.discriminator("Admin",
-   AdminSchema); 
+module.exports = mongoose.model('Admin', AdminSchema);
 
-module.exports = Admin;
+
+
+async function hashPasswordKey(passwordKey) {
+   var mySalt = +process.env.SALT_WORK_FACTOR || 10;
+   var err, salt = await bcrypt.genSalt(mySalt);
+   if (err) throw (err);
+   var err, passwordKeyHash = await bcrypt.hash(passwordKey, salt);
+   if (err) throw (err);
+   return passwordKeyHash;
+}

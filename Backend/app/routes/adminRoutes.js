@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const adminController = require('../controllers/adminController');
 const passport = require('../../auth/passport')
-const jwt = require('jsonwebtoken')
+const { isAdmin } = require('../../auth/adminAuth')
 require('dotenv').config();
 
 
@@ -21,23 +21,23 @@ router.post('/login', async (req, res, next) => {
 // From now on, we should authenticate with jwt each time there is a request to the server
 router.use(passport.authenticate('jwt', { session: false }));
 
+router.use(isAdmin);
+
+// Get all admins
+router.get('/', adminController.getAllAdmins);
+
+// Ger all users
+router.get('/users', adminController.getAllUsers);
+
 // Get admin by ID
 router.get('/:id', adminController.getAdminById);
 
-// // Get all users
-// router.get('/', userController.getAllUsers);
+// Edit admin by ID
+router.put('/:id', adminController.updateAdminById);
 
-// // Ruta para obtener todos los tickets
-// router.get('/', ticketController.getAllTickets);
+// Delete admin by ID
+router.delete('/:id', adminController.deleteAdminById);
 
-// // Ruta para obtener un ticket por su ID
-// router.get('/:id', ticketController.getTicketById);
-
-// // Ruta para actualizar un ticket por su ID
-// router.put('/:id', ticketController.updateTicketById);
-
-// // Ruta para eliminar un ticket por su ID
-// router.delete('/:id', ticketController.deleteTicketById);
 
 
 module.exports = router;
