@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
-import '../signinUser/Signin.css'
 import { useState } from 'react'
+import '../signInUser/Signin.css'
 
 export default function Home() {
    const [input, setInput] = useState({
@@ -15,7 +15,7 @@ export default function Home() {
       password: '',
       confirmPassword: ''
     })
-    const onInputChange = e => {
+    const onInputChange = (e: { target: any; }) => {
       const { name, value } = e.target;
       console.log(name, value)
       setInput(prev => ({
@@ -25,7 +25,7 @@ export default function Home() {
       validateInput(e);
     }
    
-    const validateInput = e => {
+    const validateInput = (e: { target: { name: any; value: any; }; }) => {
       let { name, value } = e.target;
       setError(prev => {
         const stateObj = { ...prev, [name]: "" };
@@ -33,13 +33,13 @@ export default function Home() {
         switch (name) {
           case "username":
             if (!value) {
-              stateObj[name] = "Please enter Username.";
+              stateObj[name as keyof typeof stateObj] = "Please enter Username.";
             }
             break;
    
           case "password":
             if (!value) {
-              stateObj[name] = "Please enter Password.";
+               stateObj[name as keyof typeof stateObj] = "Please enter Password.";
             } else if (input.confirmPassword && value !== input.confirmPassword) {
               stateObj["confirmPassword"] = "Password and Confirm Password does not match.";
             } else {
@@ -49,9 +49,9 @@ export default function Home() {
    
           case "confirmPassword":
             if (!value) {
-              stateObj[name] = "Please Confirm Password.";
+               stateObj[name as keyof typeof stateObj] = "Please Confirm Password.";
             } else if (input.password && value !== input.password) {
-              stateObj[name] = "Passwords do not match.";
+               stateObj[name as keyof typeof stateObj] = "Passwords do not match.";
             }
             break;
    
@@ -76,7 +76,7 @@ export default function Home() {
                   priority
                />
             </div>
-            <h2 className={`mb-3 text-3xl font-semibold`}>Sign Up as User</h2>
+            <h2 className={`mb-3 text-3xl font-semibold`}>Sign Up as Admin</h2>
             <form>
                <div className="user-box">
                   <input type="text" name="email" required></input>
@@ -102,8 +102,12 @@ export default function Home() {
                   <label>Confirm Password</label>
                   {error.confirmPassword && <span className='err'>{error.confirmPassword}</span>}
                </div>
+               <div className="user-box">
+                  <input type="password" name="adminKey" required></input>
+                  <label>Admin key</label>
+               </div>
 
-               <a href="#">
+               <a href="/signInAdmin" >
                   <span></span>
                   <span></span>
                   <span></span>

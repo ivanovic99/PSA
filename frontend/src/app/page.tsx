@@ -86,8 +86,8 @@ export default function Home() {
             ariaHideApp={false}
             >
             <h2>Which type of account do you want to create?</h2>
-            <a href='/signupUser' onClick={handleCloseSignUpModal}>User</a>
-            <a href='/signupAdmin' onClick={handleCloseSignUpModal}>Admin</a>
+            <a href='/signUpUser' onClick={handleCloseSignUpModal}>User</a>
+            <a href='/signUpAdmin' onClick={handleCloseSignUpModal}>Admin</a>
             <br />
             <button onClick={handleCloseSignUpModal}>Close</button>
          </Modal>
@@ -99,8 +99,8 @@ export default function Home() {
             ariaHideApp={false} // Prevents app from being hidden when the modal is open
             >
             <h2>Which type of account do you have?</h2>
-            <a href='/signinUser' onClick={handleCloseSignInModal}>User</a>
-            <a href='/signinAdmin' onClick={handleCloseSignInModal}>Admin</a>
+            <a href='/signInUser' onClick={handleCloseSignInModal}>User</a>
+            <a href='/signInAdmin' onClick={handleCloseSignInModal}>Admin</a>
             <br />
             <button onClick={handleCloseSignInModal}>Close</button>
          </Modal>

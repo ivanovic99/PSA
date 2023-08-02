@@ -1,5 +1,6 @@
+'use client'
 import Image from 'next/image'
-import './Signin.css'
+import '../signInUser/Signin.css'
 
 export default function Home() {
   return (
@@ -16,7 +17,7 @@ export default function Home() {
                   priority
                />
             </div>
-            <h2 className={`mb-3 text-3xl font-semibold`}>Sign In as User</h2>
+            <h2 className={`mb-3 text-3xl font-semibold`}>Sign In as Admin</h2>
             <form>
                <div className="user-box">
                   <input type="text" name="" required></input>
@@ -25,6 +26,10 @@ export default function Home() {
                <div className="user-box">
                   <input type="password" name="" required></input>
                   <label>Password</label>
+               </div>
+               <div className="user-box">
+                  <input type="adminKey" name="" required></input>
+                  <label>Admin Key</label>
                </div>
                <a href="#">
                   <span></span>
