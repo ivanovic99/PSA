@@ -9,7 +9,7 @@ export default function Home() {
          <div className="login-box flex flex-col items-center">
             <div className="logo mb-3">
                <Image
-                  className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
+                  className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert w-full h-auto"
                   src="forestLogo.svg"
                   alt="Next.js Logo"
                   width={80}

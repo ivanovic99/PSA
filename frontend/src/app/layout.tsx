@@ -33,7 +33,7 @@ export default function RootLayout({
                   <Image
                      src="/home.svg"
                      alt="Vercel Logo"
-                     className="dark:invert"
+                     className="dark:invert w-full h-auto"
                      width={40}
                      height={9}
                      priority
