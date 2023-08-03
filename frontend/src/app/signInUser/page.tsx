@@ -27,13 +27,13 @@ export default function Home() {
                   <input type="password" name="" required></input>
                   <label>Password</label>
                </div>
-               <a href="#">
+               <button>
                   <span></span>
                   <span></span>
                   <span></span>
                   <span></span>
                   Submit
-               </a>
+               </button>
             </form>
          </div>
          

@@ -1,13 +1,32 @@
 'use client'
 import Image from 'next/image'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import '../signInUser/Signin.css'
 
 export default function Home() {
+
+   const router = useRouter()
+   const makeAPICall = async (e: any) => {
+      e.preventDefault();
+      const res = await fetch('http://localhost:3000/signUpAdmin/api', {
+         method: 'POST',
+         body: JSON.stringify({
+            email: e.target.email.value,
+            username: e.target.username.value,
+            password: e.target.password.value,
+            confirmPassword: e.target.confirmPassword.value,
+            adminKey: e.target.adminKey.value
+         })})
+      router.push("/signInAdmin")
+      };
+
    const [input, setInput] = useState({
       username: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      email: '',
+      adminKey: ''
     });
    
     const [error, setError] = useState({
@@ -17,7 +36,6 @@ export default function Home() {
     })
     const onInputChange = (e: { target: any; }) => {
       const { name, value } = e.target;
-      console.log(name, value)
       setInput(prev => ({
         ...prev,
         [name]: value
@@ -34,6 +52,18 @@ export default function Home() {
           case "username":
             if (!value) {
               stateObj[name as keyof typeof stateObj] = "Please enter Username.";
+            }
+            break;
+
+          case "email":
+            if (!value) {
+              stateObj[name as keyof typeof stateObj] = "Please enter Email.";
+            }
+            break;
+
+          case "adminKey":
+            if (!value) {
+              stateObj[name as keyof typeof stateObj] = "Please enter an Admin Key.";
             }
             break;
    
@@ -77,9 +107,12 @@ export default function Home() {
                />
             </div>
             <h2 className={`mb-3 text-3xl font-semibold`}>Sign Up as Admin</h2>
-            <form>
+
+
+            <form onSubmit={makeAPICall}>
                <div className="user-box">
-                  <input type="text" name="email" required></input>
+                  <input type="text" name="email" required
+                  ></input>
                   <label>Email</label>
                </div>
                <div className="user-box">
@@ -107,13 +140,13 @@ export default function Home() {
                   <label>Admin key</label>
                </div>
 
-               <a href="/signInAdmin" >
+               <button>
                   <span></span>
                   <span></span>
                   <span></span>
                   <span></span>
                   Submit
-               </a>
+               </button>
             </form>
          </div>
          

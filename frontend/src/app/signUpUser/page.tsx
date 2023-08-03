@@ -103,13 +103,13 @@ export default function Home() {
                   {error.confirmPassword && <span className='err'>{error.confirmPassword}</span>}
                </div>
 
-               <a href='signInUser'>
+               <button>
                   <span></span>
                   <span></span>
                   <span></span>
                   <span></span>
                   Submit
-               </a>
+               </button>
             </form>
          </div>
          

@@ -31,13 +31,13 @@ export default function Home() {
                   <input type="adminKey" name="" required></input>
                   <label>Admin Key</label>
                </div>
-               <a href="#">
+               <button>
                   <span></span>
                   <span></span>
                   <span></span>
                   <span></span>
                   Submit
-               </a>
+               </button>
             </form>
          </div>
          
