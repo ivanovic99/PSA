@@ -1,9 +1,24 @@
 'use client'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import '../signInUser/Signin.css'
 
 export default function Home() {
-  return (
+   const router = useRouter()
+   const makeAPICall = async (e: any) => {
+      e.preventDefault();
+      const res = await fetch('http://localhost:3000/signInAdmin/api', {
+         method: 'POST',
+         body: JSON.stringify({
+            username: e.target.username.value,
+            password: e.target.password.value,
+            adminKey: e.target.adminKey.value
+         })})
+      console.log("MY RESPONSE ------->", res)
+      router.push("/")
+      };
+
+   return (
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
       
          <div className="login-box flex flex-col items-center">
@@ -18,17 +33,17 @@ export default function Home() {
                />
             </div>
             <h2 className={`mb-3 text-3xl font-semibold`}>Sign In as Admin</h2>
-            <form>
+            <form onSubmit={makeAPICall}>
                <div className="user-box">
-                  <input type="text" name="" required></input>
+                  <input type="text" name="username" required></input>
                   <label>Username or Email</label>
                </div>
                <div className="user-box">
-                  <input type="password" name="" required></input>
+                  <input type="password" name="password" required></input>
                   <label>Password</label>
                </div>
                <div className="user-box">
-                  <input type="adminKey" name="" required></input>
+                  <input type="password" name="adminKey" required></input>
                   <label>Admin Key</label>
                </div>
                <button>
