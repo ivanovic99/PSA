@@ -1,0 +1,20 @@
+.navbar-container {
+   background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+ }
+
+ /* Remove background colors and colors */
+.navbar-container,
+.navbar-container a,
+.navbar-container button,
+.navbar-container svg,
+.navbar-container span {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+/* ... Other styles ... */
