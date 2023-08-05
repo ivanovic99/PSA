@@ -6,16 +6,19 @@ import '../signInUser/Signin.css'
 export default function Home() {
    const router = useRouter()
    const makeAPICall = async (e: any) => {
-      e.preventDefault();
-      const res = await fetch('http://localhost:3000/signInAdmin/api', {
-         method: 'POST',
-         body: JSON.stringify({
-            username: e.target.username.value,
-            password: e.target.password.value,
-            adminKey: e.target.adminKey.value
-         })})
-      console.log("MY RESPONSE ------->", res)
-      router.push("/")
+      try {
+         e.preventDefault();
+         const res = await fetch('http://localhost:3000/signInAdmin/api', {
+            method: 'POST',
+            body: JSON.stringify({
+               username: e.target.username.value,
+               password: e.target.password.value,
+               adminKey: e.target.adminKey.value
+            })})
+         router.push("/")
+      } catch(err) {
+         console.log(err)
+      }
       };
 
    return (

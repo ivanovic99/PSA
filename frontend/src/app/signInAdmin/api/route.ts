@@ -1,5 +1,7 @@
 import { NextResponse, NextRequest } from 'next/server'
+import { serialize } from "cookie";
 import axios from 'axios' 
+import { COOKIE_NAME } from '../../../../constants';
 
 export async function POST(req: Request) {
    try {
@@ -8,14 +10,14 @@ export async function POST(req: Request) {
       const { token, id } = (await axios.post(APIRoute + "/admin/login", body)).data
 
       const tokenMaxAge = /*parseInt(JWT_EXPIRES_IN) **/ 100;
-      const cookieOptions = {
-         name: "token",
-         value: token,
+
+      const seralized = serialize(COOKIE_NAME, token, {
          httpOnly: true,
-         path: "/",
          secure: process.env.NODE_ENV !== "development",
+         sameSite: "strict",
          maxAge: tokenMaxAge,
-      };
+         path: "/",
+       });
 
       const response = new NextResponse(
          JSON.stringify({
@@ -24,18 +26,9 @@ export async function POST(req: Request) {
          }),
          {
          status: 200,
-         headers: { "Content-Type": "application/json" },
+         headers: { "Set-Cookie": seralized },
          }
       );
-
-      await Promise.all([
-      response.cookies.set(cookieOptions),
-      response.cookies.set({
-         name: "logged-in",
-         value: "true",
-         maxAge: tokenMaxAge,
-         }),
-      ]);
 
     return response;
    } catch(err) {

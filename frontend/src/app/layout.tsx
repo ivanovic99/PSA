@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <SessionProvider session={null}>
+   //  <SessionProvider session={null}>
       <html lang="en">
         <body className={inter.className}>
           <div className="home-logo-container">
@@ -48,6 +48,6 @@ export default function RootLayout({
           </div>
         </body>
       </html>
-    </SessionProvider>
+   //  </SessionProvider>
   )
 }
