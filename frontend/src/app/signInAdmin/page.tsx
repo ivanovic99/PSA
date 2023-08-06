@@ -19,7 +19,11 @@ export default function Home() {
                password: e.target.password.value,
                adminKey: e.target.adminKey.value
             })})
-         const { user } = await res.json()
+         const { user, message } = await res.json()
+         if (message) {
+            alert("Incorrect username or password")
+            return
+         }
          dispatch(logIn(user))
          router.push("/dashboard/admin")
       } catch(err) {
