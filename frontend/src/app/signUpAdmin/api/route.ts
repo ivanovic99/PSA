@@ -1,10 +1,12 @@
 import { NextResponse, NextRequest } from 'next/server'
 import axios from 'axios' 
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
    try {
       const body = await req.json()
-      await axios.post(process.env.API_ROUTE + "/admin/signup", body)
+      const APIRoute = process.env.API_ROUTE ? process.env.API_ROUTE : "http://localhost:8080/api"
+      await axios.post(APIRoute + "/admin/signup", body)
+      return NextResponse.json({ message: "Success", status: 200 })
    } catch(err) {
       console.log(err)
       return NextResponse.json({ message: "Error", status: 500 })

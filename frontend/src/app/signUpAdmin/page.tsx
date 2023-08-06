@@ -9,7 +9,7 @@ export default function Home() {
    const router = useRouter()
    const makeAPICall = async (e: any) => {
       e.preventDefault();
-      const res = await fetch('http://localhost:3000/signUpAdmin/api', {
+      const res = await fetch('signUpAdmin/api', {
          method: 'POST',
          body: JSON.stringify({
             email: e.target.email.value,
