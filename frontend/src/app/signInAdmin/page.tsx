@@ -2,20 +2,26 @@
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import '../signInUser/Signin.css'
+import { logIn } from '../../redux/features/auth-slice'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '@/redux/store'
 
 export default function Home() {
    const router = useRouter()
+   const dispatch = useDispatch<AppDispatch>()
    const makeAPICall = async (e: any) => {
       try {
          e.preventDefault();
-         const res = await fetch('http://localhost:3000/signInAdmin/api', {
+         const res = await fetch('signInAdmin/api', {
             method: 'POST',
             body: JSON.stringify({
                username: e.target.username.value,
                password: e.target.password.value,
                adminKey: e.target.adminKey.value
             })})
-         router.push("/")
+         const { user } = await res.json()
+         dispatch(logIn(user))
+         router.push("/dashboard/admin")
       } catch(err) {
          console.log(err)
       }

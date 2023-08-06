@@ -3,8 +3,8 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Image from 'next/image'
-import { SessionProvider } from 'next-auth/react'
 import Footer from './components/footer'
+import { ReduxProvider } from '@/redux/provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,7 +19,6 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-   //  <SessionProvider session={null}>
       <html lang="en">
         <body className={inter.className}>
           <div className="home-logo-container">
@@ -43,11 +42,12 @@ export default function RootLayout({
             </a>
           </div>
           <div className="main-container">
+            <ReduxProvider>
             {children}
+            </ReduxProvider>
             <Footer />
           </div>
         </body>
       </html>
-   //  </SessionProvider>
   )
 }

@@ -1,28 +1,28 @@
-import { NextResponse, NextRequest } from 'next/server'
+'use client'
+import { NextResponse } from 'next/server'
 import { serialize } from "cookie";
 import axios from 'axios' 
-import { COOKIE_NAME } from '../../../../constants';
+import { COOKIE_NAME, MAX_AGE } from '../../../../constants';
 
 export async function POST(req: Request) {
    try {
       const body = await req.json()
       const APIRoute = process.env.API_ROUTE ? process.env.API_ROUTE : "http://localhost:8080/api"
-      const { token, id } = (await axios.post(APIRoute + "/admin/login", body)).data
-
-      const tokenMaxAge = /*parseInt(JWT_EXPIRES_IN) **/ 100;
+      const { token, user } = (await axios.post(APIRoute + "/admin/login", body)).data
 
       const seralized = serialize(COOKIE_NAME, token, {
          httpOnly: true,
          secure: process.env.NODE_ENV !== "development",
          sameSite: "strict",
-         maxAge: tokenMaxAge,
+         maxAge: MAX_AGE,
          path: "/",
+         
        });
 
       const response = new NextResponse(
          JSON.stringify({
          status: "success",
-         token,
+         user,
          }),
          {
          status: 200,
