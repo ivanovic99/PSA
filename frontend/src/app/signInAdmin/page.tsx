@@ -6,7 +6,7 @@ import { logIn } from '../../redux/features/auth-slice'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@/redux/store'
 
-export default function Home() {
+export default function SignInAdmin() {
    const router = useRouter()
    const dispatch = useDispatch<AppDispatch>()
    const makeAPICall = async (e: any) => {
@@ -33,7 +33,6 @@ export default function Home() {
 
    return (
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      
          <div className="login-box flex flex-col items-center">
             <div className="logo mb-3">
                <Image

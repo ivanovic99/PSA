@@ -13,8 +13,11 @@ export default function ButtonNav() {
    const email = useAppSelector((state) => state.authReducer.value.email)
    const router = useRouter()
    const LogOut = async () => {
+      
+      // LOGOUT NOT WORKING YET
       // const dispatch = useDispatch<AppDispatch>()
       // dispatch(logOut())
+      
       await fetch('/api/auth/logout')
       router.push('/')
    }   
