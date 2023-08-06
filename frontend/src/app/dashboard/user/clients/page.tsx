@@ -10,6 +10,7 @@ export default async function IndexPage({
   searchParams: { q: string };
 }) {
   const search = searchParams.q ?? '';
+  // SEARCH FOR Clients
   const users = [
      {
         "id":1,
@@ -29,8 +30,13 @@ export default async function IndexPage({
         "username": "dsa",
         "email":"dsa",
      },
-     
-  ]
+  ].filter((user) => {
+      if (!search) return true;
+      if (user.name.toLowerCase().includes(search.toLowerCase())) {
+         return true;
+      }
+      return false;
+   });
    
    
    return (
