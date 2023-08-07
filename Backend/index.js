@@ -22,10 +22,10 @@ async function startServer() {
       secret: process.env.SESSION_SECRET || "my_secret_session",
       resave: false,
       saveUninitialized: false,
-      // store: MongoStore.create({
-      //    mongoUrl: dbUrlStore,
-      //    // mongoOptions: advancedOptions
-      //  })
+      store: MongoStore.create({
+         mongoUrl: dbUrlStore,
+         // mongoOptions: advancedOptions
+       })
    }))
    app.use(function(req,res,next){
       if(!req.session){
