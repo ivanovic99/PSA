@@ -2,6 +2,7 @@
 import Image from 'next/image'
 import Modal from 'react-modal'
 import { useState } from 'react'
+import Link from 'next/link';
 import './modal.css'
 
 export default function Home() {
@@ -91,8 +92,8 @@ export default function Home() {
             ariaHideApp={false}
             >
             <h2>Which type of account do you want to create?</h2>
-            <a href='/signUpUser' onClick={handleCloseSignUpModal}>User</a>
-            <a href='/signUpAdmin' onClick={handleCloseSignUpModal}>Admin</a>
+            <Link href='/signUpUser' onClick={handleCloseSignUpModal}>User</Link>
+            <Link href='/signUpAdmin' onClick={handleCloseSignUpModal}>Admin</Link>
             <br />
             <button onClick={handleCloseSignUpModal}>Close</button>
          </Modal>
@@ -104,8 +105,8 @@ export default function Home() {
             ariaHideApp={false} // Prevents app from being hidden when the modal is open
             >
             <h2>Which type of account do you have?</h2>
-            <a href='/signInUser' onClick={handleCloseSignInModal}>User</a>
-            <a href='/signInAdmin' onClick={handleCloseSignInModal}>Admin</a>
+            <Link href='/signInUser' onClick={handleCloseSignInModal}>User</Link>
+            <Link href='/signInAdmin' onClick={handleCloseSignInModal}>Admin</Link>
             <br />
             <button onClick={handleCloseSignInModal}>Close</button>
          </Modal>
