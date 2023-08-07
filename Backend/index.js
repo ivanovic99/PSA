@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const connectToDatabase = require("./config/db");
 const passport = require('passport');
 const middlewares = require('./config/protocolMiddlewares');
@@ -15,13 +16,23 @@ async function startServer() {
    
    // Initialize the Server
    const app = express();
-   
+
+   const dbUrlStore = 'mongodb+srv://ivan_erlich:Ivanovic99@psa.rqq1org.mongodb.net/'
    app.use(session({
       secret: process.env.SESSION_SECRET || "my_secret_session",
       resave: false,
-      saveUninitialized: false
-    }))
-    
+      saveUninitialized: false,
+      store: MongoStore.create({
+         mongoUrl: dbUrlStore,
+         // mongoOptions: advancedOptions
+       })
+   }))
+   app.use(function(req,res,next){
+      if(!req.session){
+            return next(new Error('Oh no! The session is not working!')) //handle error
+      }
+      next() //otherwise continue
+   });
    // Initialize Passport
    app.use(passport.initialize());
    app.use(passport.session())
