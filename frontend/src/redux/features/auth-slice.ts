@@ -38,6 +38,7 @@ const authSlice = createSlice({
       },
       logIn: (state, action: PayloadAction<AuthState>) => {
          state.value = action.payload
+         state.value.loggedIn = true
       },
       update: (state, action: PayloadAction<AuthState>) => {
          state.value = action.payload

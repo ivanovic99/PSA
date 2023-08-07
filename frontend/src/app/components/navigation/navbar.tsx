@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -26,7 +26,7 @@ function classNames(...classes: string[]) {
 
 export default function Navbar() {
    const pathname = usePathname();
-   const user = useAppSelector((state) => state.authReducer.value)
+   const user = useAppSelector((state) => state.persistedReducer.value)
    const router = useRouter();
    const dispatch = useDispatch<AppDispatch>()
 
@@ -36,16 +36,18 @@ export default function Navbar() {
       router.push('/')  
    }
 
+   useEffect(() => {}, [user])
+
   return (
      <Disclosure as="nav" className="navbar-container bg-gradient-to-t from-transparent via-transparent dark:from-black dark:via-black">
       {({ open }) => (
          <>
-         {user.loggedIn ? (
+         {!user.loggedIn ? (
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                <div className="flex h-16 justify-center">
                   <div className="flex">
                      <div className="flex flex-shrink-0 items-center">
-                        <a href="/">
+                        <Link href="/">
                            <Image
                               src="/home.svg"
                               alt="Vercel Logo"
@@ -56,7 +58,7 @@ export default function Navbar() {
                            <h2 className={`mb-2 text-1xl font-semibold`}>
                               Home
                            </h2>
-                        </a>
+                        </Link>
                      </div>
                   </div>
                </div>
@@ -67,7 +69,7 @@ export default function Navbar() {
                <div className="flex h-16 justify-between">
                   <div className="flex">
                      <div className="flex flex-shrink-0 items-center">
-                        <a href="/dashboard/user/clients">
+                        <Link href="/dashboard/user/clients">
                            <Image
                               src="/forestLogo.svg"
                               alt="Vercel Logo"
@@ -75,11 +77,11 @@ export default function Navbar() {
                               width={2}
                               height={2}
                            />
-                        </a>
+                        </Link>
                      </div>
                      <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
                         {navigation.map((item) => (
-                        <a
+                        <Link
                            key={item.name}
                            href={item.href}
                            className={classNames(
@@ -91,7 +93,7 @@ export default function Navbar() {
                            aria-current={pathname === item.href ? 'page' : undefined}
                         >
                            {item.name}
-                        </a>
+                        </Link>
                         ))}
                      </div>
                   </div>
