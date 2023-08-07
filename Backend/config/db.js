@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const connectToDatabase = async () => {
-   const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/PSA';
+   const dbUrl = process.env.MONGODB_URI || 'mongodb+srv://ivan_erlich:Ivanovic99@psa.rqq1org.mongodb.net/';
    // Conexión a la base de datos en Render
    // const dbUrl = 'mongodb+srv://ivan_erlich:Ivanovic99@dbsquad15.nugafov.mongodb.net/?retryWrites=true&w=majority';
    await mongoose.connect(dbUrl, {
