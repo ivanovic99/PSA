@@ -2,12 +2,12 @@
 import { NextResponse } from 'next/server'
 import { serialize } from "cookie";
 import axios from 'axios' 
-import { COOKIE_NAME, MAX_AGE } from '../../../../constants';
+import { API_ROUTE, COOKIE_NAME, MAX_AGE } from '../../../../constants';
 
 export async function POST(req: Request) {
    try {
       const body = await req.json()
-      const APIRoute = process.env.API_ROUTE ? process.env.API_ROUTE : "http://localhost:8080/api"
+      const APIRoute = process.env.API_ROUTE ? process.env.API_ROUTE : API_ROUTE
       const { token, user } = (await axios.post(APIRoute + "/admin/login", body)).data
 
       const seralized = serialize(COOKIE_NAME, token, {

@@ -30,8 +30,9 @@ export default function Navbar() {
    const router = useRouter();
    const dispatch = useDispatch<AppDispatch>()
 
-   function signOut(): void {
+   async function signOut() {
       dispatch(logOut())
+      await fetch('/api/auth/logout')
       router.push('/')  
    }
 
