@@ -24,6 +24,8 @@ const initialState = {
       adress: null,
       
       phone: null,
+
+      image: null,
    } as AuthState
 } as InitialState
 

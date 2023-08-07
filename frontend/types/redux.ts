@@ -10,6 +10,7 @@ export type AuthState = {
    nationality: string | null,
    adress: string | null,
    phone: string | null,
+   image: string | null,
 }
 
 export type InitialState = {

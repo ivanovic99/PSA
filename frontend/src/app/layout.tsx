@@ -22,14 +22,14 @@ export default function RootLayout({
   return (
       <html lang="en">
         <body className={inter.className}>
-          <div className="main-container">
             <ReduxProvider>
                <Navbar />
+               <div className="main-container">
 
-               {children}
+                  {children}
+                  <Footer />
+               </div>
             </ReduxProvider>
-            <Footer />
-          </div>
         </body>
       </html>
   )
