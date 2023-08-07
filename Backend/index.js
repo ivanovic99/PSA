@@ -17,7 +17,7 @@ async function startServer() {
    // Initialize the Server
    const app = express();
 
-   const dbUrlStore = 'mongodb+srv://ivan_erlich:Ivanovic99@psa.rqq1org.mongodb.net/'
+   const dbUrlStore = 'mongodb+srv://ivan_erlich:Ivanovic99@psa.rqq1org.mongodb.net/' // This should be in an .env var!
    app.use(session({
       secret: process.env.SESSION_SECRET || "my_secret_session",
       resave: false,
