@@ -74,7 +74,7 @@ export default function Navbar() {
                            <Image
                               src="/forestLogo.svg"
                               alt="Vercel Logo"
-                              className="dark:invert w-10 h-10"
+                              className="dark:invert w-10 h-10 "
                               width={2}
                               height={2}
                               blurDataURL={'/forestLogo.svg'}
@@ -102,16 +102,15 @@ export default function Navbar() {
                   <div className="hidden sm:ml-6 sm:flex sm:items-center">
                      <Menu as="div" className="relative ml-3">
                         <div>
-                        <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
-                           <span className="sr-only">Open user menu</span>
-                           <Image
-                              className="h-8 w-8 rounded-full"
-                              src={user?.image || '/forestLogo.svg'}
-                              height={32}
-                              width={32}
-                              alt={`${user?.name || 'placeholder'} avatar`}
-                           />
-                        </Menu.Button>
+                           <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
+                              <Image
+                                 className="h-8 w-8 rounded-full hover:bg-blue-200"
+                                 src={user?.image || '/forestLogo.svg'}
+                                 height={32}
+                                 width={32}
+                                 alt={`${user?.name || 'placeholder'} avatar`}
+                              />
+                           </Menu.Button>
                         </div>
                         <Transition
                         as={Fragment}

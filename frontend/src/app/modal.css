@@ -14,12 +14,7 @@
    align-items: center;
    justify-content: center;
    margin: auto; /* This will center the modal */
-   background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+
    border-radius: 8px; /* Add rounded corners to the modal */
    padding: 20px; /* Add padding inside the modal */
    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
