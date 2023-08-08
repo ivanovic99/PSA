@@ -54,6 +54,7 @@ export default function Navbar() {
                               className="dark:invert w-10 h-10"
                               width={2}
                               height={2}
+                              blurDataURL={'/home.svg'}
                            />
                            <h2 className={`mb-2 text-1xl font-semibold`}>
                               Home
@@ -76,6 +77,7 @@ export default function Navbar() {
                               className="dark:invert w-10 h-10"
                               width={2}
                               height={2}
+                              blurDataURL={'/forestLogo.svg'}
                            />
                         </Link>
                      </div>
@@ -129,7 +131,7 @@ export default function Navbar() {
                                        active ? 'bg-gray-100' : '',
                                        'flex w-full px-4 py-2 text-sm text-gray-700'
                                        )}
-                                       href={`/dashboard/${user.id}/settings`}
+                                       href={ user.isAdmin ? `/dashboard/admin/${user.id}/settings` : `/dashboard/user/${user.id}/settings`}
                                     >
                                        My settings
                                     </Link>

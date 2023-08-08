@@ -24,6 +24,8 @@ export default function SignInAdmin() {
             alert("Incorrect username or password")
             return
          }
+         user.isAdmin = true
+         user.id = user._id
          dispatch(logIn(user))
          router.push("/dashboard/admin")
       } catch(err) {
