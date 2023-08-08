@@ -2,10 +2,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Image from 'next/image'
-import Footer from './components/footer'
+import { Footer, Navbar } from './components'
 import { ReduxProvider } from '@/redux/provider'
-import Navbar from "./components/navigation/navbar";
 
 const inter = Inter({ subsets: ['latin'] })
 
