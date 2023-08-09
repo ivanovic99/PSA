@@ -8,7 +8,7 @@ export type AuthState = {
    lastname: string | null,
    age: number | null,
    nationality: string | null,
-   adress: string | null,
+   address: string | null,
    phone: string | null,
    image: string | null,
 }

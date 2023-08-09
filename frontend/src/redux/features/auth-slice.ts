@@ -21,7 +21,7 @@ const initialState = {
       
       nationality: null,
       
-      adress: null,
+      address: null,
       
       phone: null,
 
