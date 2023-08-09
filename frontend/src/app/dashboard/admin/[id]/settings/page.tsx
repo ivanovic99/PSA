@@ -5,10 +5,21 @@ import { AppDispatch, useAppSelector } from "@/redux/store";
 import { useDispatch } from 'react-redux';
 import { update } from '@/redux/features/auth-slice';
 import { useState } from 'react';
-
+import Modal from 'react-modal'
+import '../../../../modal.css'
 
 
 export default function Settings(this: any) {
+   const [isConfirmEditionModalOpen, setIsConfirmEditionModalOpen] = useState(false)
+   const [isLoading, setIsLoading] = useState(false)
+
+   const handleOpenConfirmEditionModal = () => {
+      setIsConfirmEditionModalOpen(true);
+    };
+    
+    const handleCloseConfirmEditionModal = () => {
+      setIsConfirmEditionModalOpen(false);
+    };    
    const dispatch = useDispatch<AppDispatch>()
    const user = useAppSelector((state) => state.persistedReducer.value)
    const [ name, setName ] = useState<string>(user.name ? user.name : "")   
@@ -23,32 +34,34 @@ export default function Settings(this: any) {
    const updateUser = async (e: any) => {
       e.preventDefault()
       const updateData = {
-         name: e.target.name.value,
-         lastname: e.target.lastname.value,
-         email: e.target.email.value,
-         phone: e.target.phone.value,
-         address: e.target.address.value,
-         username: e.target.username.value,
-         nationality: e.target.nationality.value,
-         age: e.target.age.value,
+         name,
+         lastname,
+         email,
+         phone,
+         address,
+         username,
+         nationality,
+         age,
          loggedIn: true,
          isAdmin: user.isAdmin,
          id: user.id,
          image: null,
       }
       dispatch(update(updateData))
+      setIsLoading(true)
       await fetch('./settings/api', {
          method: 'PUT',
          body: JSON.stringify(updateData),
       })
-      
+      setIsLoading(false)
+      handleCloseConfirmEditionModal()
    }
    return (
       <div className="">
          <div className="formbold-main-wrapper">
             <div className="formbold-form-wrapper">
                
-               <form onSubmit={updateUser}>
+               <form>
                   <div className="formbold-form-title">
                      <h2 className="">{user.username}'s settings</h2>
                   </div>
@@ -172,7 +185,25 @@ export default function Settings(this: any) {
                      </label>
                   </div>
 
-                  <button className="formbold-btn">Update</button>
+                  <button className="formbold-btn" type='button' onClick={handleOpenConfirmEditionModal}>Update</button>
+                  <Modal
+                     isOpen={isConfirmEditionModalOpen}
+                     onRequestClose={handleCloseConfirmEditionModal}
+                     ariaHideApp={false}
+                     >
+                     <h2>Are you sure you want to edit your data?</h2>
+                     <button onClick={updateUser}>Yes</button>
+                     <button onClick={handleCloseConfirmEditionModal}>No</button>
+                     <br />
+                     <button onClick={handleCloseConfirmEditionModal}>Close</button>
+                  </Modal>
+                  <Modal
+                     isOpen={isLoading}
+                     ariaHideApp={false}
+                     >
+                     <h2>Updating ...</h2>
+                     <br />
+                  </Modal>
                </form>
             </div>
          </div>
