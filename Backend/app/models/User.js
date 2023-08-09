@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
    
    nationality: { type: String, required: false },
    
-   adress: { type: String, required: false },
+   address: { type: String, required: false },
    
    phone: [{ type: String, required: false }],
 
