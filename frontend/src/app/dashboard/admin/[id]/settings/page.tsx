@@ -20,7 +20,7 @@ export default function Settings(this: any) {
    const [ nationality, setNationality ] = useState<string>(user.nationality ? user.nationality : "")
    const [ age, setAge ] = useState<number>(user.age ? user.age : 18)
 
-   const updateUser = (e: any) => {
+   const updateUser = async (e: any) => {
       e.preventDefault()
       const updateData = {
          name: e.target.name.value,
@@ -37,6 +37,10 @@ export default function Settings(this: any) {
          image: null,
       }
       dispatch(update(updateData))
+      await fetch('./settings/api', {
+         method: 'PUT',
+         body: JSON.stringify(updateData),
+      })
       
    }
    return (
