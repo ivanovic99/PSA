@@ -59,7 +59,7 @@ async function updateAdminById(req, res) {
    try {
       const adminId = req.user._id;
       if (req.params.id !== adminId) {
-         return res.status(401).json({ error: 'Unauthorized' });
+         return res.status(401).json({ error: 'Unauthorized, ids do not match' });
       }
       const { username, email, adminKey, password, name, lastname, age, nationality, address, phone } = req.body;
       const updateAdminById = await Admin.findByIdAndUpdate(adminId, 
