@@ -8,7 +8,7 @@ export default function Home() {
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
       
          <div className="login-box flex flex-col items-center">
-            <Link href="/" className='mb-1 text-1xl font-semibold mr-auto p-15 hover:opacity-60 hover:underline'> {'<-'} Go Back
+            <Link href="/" className='mb-1 text-1xl font-semibold mr-auto p-15 hover:opacity-60 go-back'> <i className="arrow left"></i> Go Back
                   </Link>
             <div className="logo mb-3">
                <Image

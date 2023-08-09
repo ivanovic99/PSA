@@ -47,19 +47,9 @@ export default function Navbar() {
                <div className="flex h-16 justify-center">
                   <div className="flex">
                      <div className="flex flex-shrink-0 items-center">
-                        <Link href="/">
-                           <Image
-                              src="/home.svg"
-                              alt="Vercel Logo"
-                              className="dark:invert w-10 h-10"
-                              width={2}
-                              height={2}
-                              blurDataURL={'/home.svg'}
-                           />
-                           <h2 className={`mb-2 text-1xl font-semibold`}>
-                              Home
-                           </h2>
-                        </Link>
+                           <h3 className={`mb-2 md:text-2xl xs:text-1xl font-semibold italic`}>
+                              Welcome to the PSA official website!
+                           </h3>
                      </div>
                   </div>
                </div>
