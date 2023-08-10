@@ -12,7 +12,6 @@ export default async function IndexPage({
   searchParams: { q: string };
 }) {
    const search = searchParams.q ?? '';
-   // SEARCH FOR Clients in the server
    const users = [
       {
          "id":1,

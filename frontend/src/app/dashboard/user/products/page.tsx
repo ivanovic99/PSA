@@ -2,6 +2,7 @@ import { Card, Title } from '@tremor/react';
 import Search from '@/app/components/dashboard/search';
 import ProductsTable from '@/app/components/dashboard/table';
 import AddButton from '@/app/components/dashboard/addButton';
+import { Product } from '@/../types/product';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,7 +12,6 @@ export default async function IndexPage({
   searchParams: { q: string };
 }) {
    const search = searchParams.q ?? '';
-   // SEARCH FOR Clients in the server
    const products = [
       {
          "id":1,

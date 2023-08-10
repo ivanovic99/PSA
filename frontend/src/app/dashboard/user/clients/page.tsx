@@ -23,7 +23,6 @@ export default function IndexPage({
       
    }, []);
    const search = searchParams.q ?? '';
-   // SEARCH FOR Clients in the server
    clients.filter((client) => {
          if (!search) return true;
          if (client.name.toLowerCase().includes(search.toLowerCase())) {

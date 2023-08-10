@@ -9,13 +9,9 @@ import {
 } from '@tremor/react';
 import { User } from '@/../types/user';
 import { Client } from '@/../types/client';
+import { Product } from '@/../types/product';
 import './dashboard.css'
 
-interface Product {
-  id: number;
-  name: string;
-  version: string;
-}
 
 function isUser(object: any): object is User {
    console.log("is user?", 'user' in object)
