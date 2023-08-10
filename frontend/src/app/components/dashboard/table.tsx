@@ -88,7 +88,7 @@ export default function UsersTable({ users, products }: { users: User[] | Client
                </TableHead>
                <TableBody>
                   {products.map((product) => (
-                     <TableRow key={product.id}>
+                     <TableRow key={product._id}>
                         <TableCell className='fixed-width-cell'>{product.name}</TableCell>
                         <TableCell className='fixed-width-cell'>
                            <Text>{product.description}</Text>
@@ -97,7 +97,7 @@ export default function UsersTable({ users, products }: { users: User[] | Client
                            <Text>{product.versions.at(-1)?.versionNumber}</Text>
                         </TableCell>
                         <TableCell className='w-0 hover:underline text-blue-500'>
-                              <Link href={`/dashboard/user/products/${product.id}`}>
+                              <Link href={`/dashboard/user/products/${product._id}`}>
                                  See details
                               </Link>
                            </TableCell>
