@@ -7,6 +7,7 @@ import {
   TableCell,
   Text
 } from '@tremor/react';
+import Link from 'next/link';
 import { User } from '@/../types/user';
 import { Client } from '@/../types/client';
 import { Product } from '@/../types/product';
@@ -41,6 +42,11 @@ export default function UsersTable({ users, products }: { users: User[] | Client
                               <TableCell className='fixed-width-cell'>
                                  <Text>{user.email}</Text>
                               </TableCell>
+                              <TableCell className='w-0 hover:underline text-blue-500'>
+                              <Link href={`/dashboard/admin/users/${user.id}`}>
+                                 See details
+                              </Link>
+                           </TableCell>
                            </TableRow>
                         </TableBody>
                      </Table>
@@ -60,6 +66,11 @@ export default function UsersTable({ users, products }: { users: User[] | Client
                            </TableCell>
                            <TableCell className='fixed-width-cell'>
                               <Text>{user.email}</Text>
+                           </TableCell>
+                           <TableCell className='w-0 hover:underline text-blue-500'>
+                              <Link href={`/dashboard/user/clients/${user._id}`}>
+                                 See details
+                              </Link>
                            </TableCell>
                         </TableRow>
                      </Table>
@@ -85,6 +96,11 @@ export default function UsersTable({ users, products }: { users: User[] | Client
                         <TableCell className='fixed-width-cell'>
                            <Text>{product.versions.at(-1)?.versionNumber}</Text>
                         </TableCell>
+                        <TableCell className='w-0 hover:underline text-blue-500'>
+                              <Link href={`/dashboard/user/products/${product.id}`}>
+                                 See details
+                              </Link>
+                           </TableCell>
                      </TableRow>
                   ))}
                </TableBody>
