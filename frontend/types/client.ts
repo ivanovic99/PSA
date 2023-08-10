@@ -1,5 +1,7 @@
 export interface Client  {
 
+   _id: number,
+
    CUIL: number,
    
    name: string,

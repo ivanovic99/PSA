@@ -1,5 +1,8 @@
+import { Version } from './versions';
+
 export interface Product {
    id: number;
    name: string;
-   version: string;
+   versions: Version[];
+   description: string;
  }
