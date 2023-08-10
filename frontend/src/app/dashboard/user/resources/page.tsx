@@ -1,6 +1,6 @@
 import { Card, Title } from '@tremor/react';
 import Search from '@/app/components/dashboard/search';
-import ProductsTable from '@/app/components/dashboard/table';
+import UsersTable from '@/app/components/dashboard/table';
 import AddButton from '@/app/components/dashboard/addButton';
 
 export const dynamic = 'force-dynamic';
@@ -12,25 +12,28 @@ export default async function IndexPage({
 }) {
    const search = searchParams.q ?? '';
    // SEARCH FOR Clients in the server
-   const products = [
+   const users = [
       {
          "id":1,
          "name":"John Doe",
-         "version": "1.0.0",
+         "username": "johndoe",
+         "email":"",
       },
       {
          "id":2,
          "name":"John Doe 2",
-         "version": "1.0.0",
+         "username": "johndoe2",
+         "email":"",
       },
       {
          "id":3,
          "name":"dsa",
-         "version": "1.0.0",
+         "username": "dsa",
+         "email":"dsa",
       },
-   ].filter((product) => {
+   ].filter((user) => {
          if (!search) return true;
-         if (product.name.toLowerCase().includes(search.toLowerCase())) {
+         if (user.name.toLowerCase().includes(search.toLowerCase())) {
             return true;
          }
          return false;
@@ -39,10 +42,10 @@ export default async function IndexPage({
    
    return (
     <main className="p-4 md:p-10 mx-auto max-w-7xl">
-      <Title>Products</Title>
+      <Title>Resources</Title>
       <Search />
       <Card className="mt-6">
-        <ProductsTable users={[]} products={products} />
+        <UsersTable users={users} products={[]} />
       </Card>
       <AddButton/>
     </main>
