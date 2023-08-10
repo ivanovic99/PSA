@@ -14,13 +14,10 @@ import './dashboard.css'
 
 
 function isUser(object: any): object is User {
-   console.log("is user?", 'user' in object)
-   console.log("object --->", object)
    return 'id' in object;
 }
 
 export default function UsersTable({ users, products }: { users: User[] | Client[], products: Product[] }) {
-   console.log("users --->", users)
   return (
       <div>
          {users.length > 0 ? (
@@ -56,7 +53,7 @@ export default function UsersTable({ users, products }: { users: User[] | Client
                               <TableHeaderCell className='fixed-width-cell'>Email</TableHeaderCell>
                            </TableRow>
                         </TableHead>
-                        <TableRow key={user.CUIL}>
+                        <TableRow key={user._id}>
                            <TableCell className='fixed-width-cell'>{user.name}</TableCell>
                            <TableCell className='fixed-width-cell'>
                               <Text>{user.CUIL}</Text>
@@ -74,6 +71,7 @@ export default function UsersTable({ users, products }: { users: User[] | Client
                <TableHead>
                   <TableRow>
                      <TableHeaderCell className='fixed-width-cell'>Name</TableHeaderCell>
+                     <TableHeaderCell className='fixed-width-cell'>Description</TableHeaderCell>
                      <TableHeaderCell className='fixed-width-cell'>Version</TableHeaderCell>
                   </TableRow>
                </TableHead>
@@ -82,7 +80,10 @@ export default function UsersTable({ users, products }: { users: User[] | Client
                      <TableRow key={product.id}>
                         <TableCell className='fixed-width-cell'>{product.name}</TableCell>
                         <TableCell className='fixed-width-cell'>
-                           <Text>{product.version}</Text>
+                           <Text>{product.description}</Text>
+                        </TableCell>
+                        <TableCell className='fixed-width-cell'>
+                           <Text>{product.versions.at(-1)?.versionNumber}</Text>
                         </TableCell>
                      </TableRow>
                   ))}
