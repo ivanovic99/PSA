@@ -8,7 +8,7 @@ import { Client } from '@/../types/client';
 
 export const dynamic = 'force-dynamic';
 
-export default function IndexPage({
+export default function Clients({
   searchParams,
 }: {
   searchParams: { q: string };
@@ -26,10 +26,11 @@ export default function IndexPage({
    clients?.filter((client) => {
          if (!search) return true;
          if (client.name.toLowerCase().includes(search.toLowerCase())) {
+            console.log(client.name)
             return true;
          }
          return false;
-      });
+      }) as Client[];
    
    
    return (

@@ -25,15 +25,15 @@ export default function UsersTable({ users, products }: { users: User[] | Client
             <div>
                {users?.map((user) => (
                   (isUser(user) ? (
-                     <Table>
-                        <TableHead>
-                           <TableRow>
+                     <Table key={user.id + 4}>
+                        <TableHead key={user.id + 3}>
+                           <TableRow key={user.id + 2}>
                               <TableHeaderCell className='fixed-width-cell'>Name</TableHeaderCell>
                               <TableHeaderCell className='fixed-width-cell'>Username</TableHeaderCell>
                               <TableHeaderCell className='fixed-width-cell'>Email</TableHeaderCell>
                            </TableRow>
                         </TableHead>
-                        <TableBody>  
+                        <TableBody key={user.id + 1}>  
                            <TableRow key={user.id}>
                               <TableCell className='fixed-width-cell'>{user.name}</TableCell>
                               <TableCell className='fixed-width-cell'>
@@ -51,9 +51,9 @@ export default function UsersTable({ users, products }: { users: User[] | Client
                         </TableBody>
                      </Table>
                   ) : (
-                     <Table>
-                        <TableHead>
-                           <TableRow>
+                     <Table key={user._id + 2}>
+                        <TableHead key={user._id + 1}>
+                           <TableRow key={user._id}>
                               <TableHeaderCell className='fixed-width-cell'>Name</TableHeaderCell>
                               <TableHeaderCell className='fixed-width-cell'>CUIL</TableHeaderCell>
                               <TableHeaderCell className='fixed-width-cell'>Email</TableHeaderCell>
