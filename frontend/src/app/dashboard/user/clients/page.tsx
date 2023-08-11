@@ -23,22 +23,25 @@ export default function Clients({
       
    }, []);
    const search = searchParams.q ?? '';
-   clients?.filter((client) => {
-         if (!search) return true;
-         if (client.name.toLowerCase().includes(search.toLowerCase())) {
-            console.log(client.name)
-            return true;
-         }
-         return false;
-      }) as Client[];
-   
-   
+   var filteredClients = [] as Client[]
+   var filtered = false
+   if (clients && search) {
+      filteredClients = (clients?.filter((client) => {
+            if (!search) return true;
+            if (client.name.toLowerCase().includes(search.toLowerCase())) {
+               return true;
+            }
+            return false;
+         }) as Client[]);
+      filtered = true
+   }
+
    return (
       <main className="p-4 md:p-10 mx-auto max-w-7xl">
          <Title>Clients</Title>
          <Search />
          <Card className="mt-6">
-            <UsersTable users={clients} products={[]} />
+            <UsersTable users={filtered ? filteredClients : clients} products={[]} />
          </Card>
          <AddButton />
       </main>

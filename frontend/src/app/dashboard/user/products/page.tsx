@@ -24,20 +24,25 @@ export default function IndexPage({
       
    }, []);
    const search = searchParams.q ?? '';
-   products?.filter((client) => {
-         if (!search) return true;
-         if (client.name.toLowerCase().includes(search.toLowerCase())) {
-            return true;
-         }
-         return false;
-      });
+   var filteredProducts = [] as Product[]
+   var filtered = false
+   if (products && search) {
+      filteredProducts = (products?.filter((product) => {
+            if (!search) return true;
+            if (product.name.toLowerCase().includes(search.toLowerCase())) {
+               return true;
+            }
+            return false;
+         }) as Product[]);
+      filtered = true
+   }
    
    return (
     <main className="p-4 md:p-10 mx-auto max-w-7xl">
       <Title>Products</Title>
       <Search />
       <Card className="mt-6">
-        <ProductsTable users={[]} products={products} />
+        <ProductsTable users={[]} products={filtered ? filteredProducts : products} />
       </Card>
       <AddButton/>
     </main>
