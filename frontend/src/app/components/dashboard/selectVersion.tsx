@@ -5,12 +5,17 @@ import { useState, useEffect } from 'react';
 import { Version } from '@/../types/versions';
 
 export default function SelectVersion({ versions, productId }: { versions: Version[], productId: number}) {
-   const [selectedVersion, setSelectedVersion] = useState(versions?.at(-1)?.versionNumber);
+   const [selectedVersion, setSelectedVersion] = useState<Version>({
+      _id: 0,
+      versionNumber: '',
+      customization: '',
+
+   } as unknown as Version)
    useEffect(() => {
-      setSelectedVersion(versions?.at(-1)?.versionNumber)
+      setSelectedVersion(versions[versions.length-1])
    }, [versions]);
-   const handleVersionSelect = (e: any) => {
-      setSelectedVersion(e.target.value);
+   const handleVersionSelect = (version: Version) => {
+      setSelectedVersion(version);
    };
    return (
       <div>
@@ -22,15 +27,15 @@ export default function SelectVersion({ versions, productId }: { versions: Versi
                <span className="placeholder">Choose version...</span>
                {
                   versions.map((version, index) => (
-                     <label key={version.id} className="option">
-                        <input type="radio" name="option" onClick={handleVersionSelect} value={version.versionNumber} defaultChecked={index === 0}></input>
+                     <label key={version._id} className="option">
+                        <input type="radio" name="option" onClick={() => {handleVersionSelect(version)}} value={version.versionNumber} defaultChecked={index === versions.length-1}></input>
                         <span className="title animated fadeIn"><i className=""></i>{version.versionNumber}</span>
                      </label>
                   ))
                }
             </div>
-            <Link href={`${productId}/version/${selectedVersion}`} className="version-link">
-               See details of version {selectedVersion}
+            <Link href={`${productId}/version/${selectedVersion?._id}`} className="version-link">
+               See details of version {selectedVersion?.versionNumber }
             </Link>
          </div>
 

@@ -56,7 +56,7 @@ export default function Settings() {
                
                <form>
                   <div className="formbold-form-title">
-                     <h2 className="">Product's details</h2>
+                     <h2 className="">{product.name}'s details</h2>
                   </div>
                   <br />
                   <div>
@@ -101,7 +101,7 @@ export default function Settings() {
                   <div className="formbold-mb-3">
                      <SelectVersion versions={product.versions} productId={product._id}/>
                   </div>
-                  <Link href={`./${productId}/addVersion`} className="">Add version</Link>
+                  <Link href={`./${productId}/addVersion`} className="button-67">Add version</Link>
                   <br />
                   <button className="formbold-btn" type='button' onClick={handleOpenEditProductModal}>Edit Product</button>
                   <Modal

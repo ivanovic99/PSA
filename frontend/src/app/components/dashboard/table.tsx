@@ -83,7 +83,7 @@ export default function UsersTable({ users, products }: { users: User[] | Client
                   <TableRow>
                      <TableHeaderCell className='fixed-width-cell'>Name</TableHeaderCell>
                      <TableHeaderCell className='fixed-width-cell'>Description</TableHeaderCell>
-                     <TableHeaderCell className='fixed-width-cell'>Version</TableHeaderCell>
+                     <TableHeaderCell className='fixed-width-cell'>Latest Version</TableHeaderCell>
                   </TableRow>
                </TableHead>
                <TableBody>

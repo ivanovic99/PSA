@@ -1,5 +1,5 @@
 export interface Version {
-   id: number;
+   _id: number;
    versionNumber: string;
    customization: string;
 }
