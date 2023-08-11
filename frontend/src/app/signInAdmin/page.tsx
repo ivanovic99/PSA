@@ -63,6 +63,10 @@ export default function SignInAdmin() {
                   <input type="password" name="adminKey" required></input>
                   <label>Admin Key</label>
                </div>
+               <Link href={'/forgotPassword'} className='custom-link'>
+                  Forgot your password?
+               </Link>
+               <br />
                <button>
                   <span></span>
                   <span></span>

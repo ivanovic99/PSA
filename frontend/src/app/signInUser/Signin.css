@@ -185,3 +185,14 @@ background-size: 0 0.1em, 100% 0.1em;
    transform: rotate(135deg);
    -webkit-transform: rotate(135deg);
 }
+
+.custom-link {
+   text-decoration: underline;
+   color: rgb(15, 15, 15);
+   transition: color 0.3s ease;
+ }
+ 
+ .custom-link:hover {
+   color: rgb(45, 45, 156);
+ }
+ 

@@ -30,6 +30,10 @@ export default function Home() {
                   <input type="password" name="" required></input>
                   <label>Password</label>
                </div>
+               <Link href={'/forgotPassword'} className='custom-link'>
+                  Forgot your password?
+               </Link>
+               <br />
                <button>
                   <span></span>
                   <span></span>
