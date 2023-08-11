@@ -24,7 +24,7 @@ export default function IndexPage({
       
    }, []);
    const search = searchParams.q ?? '';
-   products.filter((client) => {
+   products?.filter((client) => {
          if (!search) return true;
          if (client.name.toLowerCase().includes(search.toLowerCase())) {
             return true;

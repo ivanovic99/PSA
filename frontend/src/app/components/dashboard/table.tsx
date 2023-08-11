@@ -21,9 +21,9 @@ function isUser(object: any): object is User {
 export default function UsersTable({ users, products }: { users: User[] | Client[], products: Product[] }) {
   return (
       <div>
-         {users.length > 0 ? (
+         {users?.length > 0 ? (
             <div>
-               {users.map((user) => (
+               {users?.map((user) => (
                   (isUser(user) ? (
                      <Table>
                         <TableHead>
@@ -87,7 +87,7 @@ export default function UsersTable({ users, products }: { users: User[] | Client
                   </TableRow>
                </TableHead>
                <TableBody>
-                  {products.map((product) => (
+                  {products?.map((product) => (
                      <TableRow key={product._id}>
                         <TableCell className='fixed-width-cell'>{product.name}</TableCell>
                         <TableCell className='fixed-width-cell'>
