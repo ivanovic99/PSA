@@ -26,9 +26,8 @@ export default function Clients({
    const search = searchParams.q ?? '';
    var filteredClients = [] as Client[]
    var filtered = false
-   if (clients && search) {
+   if (search) {
       filteredClients = (clients?.filter((client) => {
-            if (!search) return true;
             if (client.name.toLowerCase().includes(search.toLowerCase())) {
                return true;
             }
@@ -36,6 +35,7 @@ export default function Clients({
          }) as Client[]);
       filtered = true
    }
+   console.log("filteredClients", filteredClients)
 
    return (
       <main className="p-4 md:p-10 mx-auto max-w-7xl">
