@@ -56,7 +56,7 @@ export default function Settings() {
                
                <form>
                   <div className="formbold-form-title">
-                     <h2 className="">{product.name}'s details</h2>
+                     <h2 className="">{product.name}&apos;s details</h2>
                   </div>
                   <br />
                   <div>

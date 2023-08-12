@@ -9,7 +9,7 @@ import { Version } from '@/../types/versions';
 import '@/app/components/dashboard/select.css'
 import Link from 'next/link';
 
-export default function addVersion() {
+export default function AddVersion() {
    const router = useRouter()
    const productId = useParams().id
    const [ lastVersion, setLastVersion ] = useState<Version>({
@@ -123,7 +123,7 @@ export default function addVersion() {
                      onRequestClose={handleCloseAddVersionModal}
                      ariaHideApp={false}
                      >
-                     <h2>Add this version to product '{product.name}'?</h2>
+                     <h2>Add this version to product &lsquo;{product.name}&rsquo;?</h2>
                      <button onClick={addVersion}>Yes</button>
                      <button onClick={handleCloseAddVersionModal}>No</button>
                      <br />

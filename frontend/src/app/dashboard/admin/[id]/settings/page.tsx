@@ -63,7 +63,7 @@ export default function Settings(this: any) {
                
                <form>
                   <div className="formbold-form-title">
-                     <h2 className="">{user.username}'s settings</h2>
+                     <h2 className="">{user.username}&apos;s settings</h2>
                   </div>
 
                   <div className="formbold-input-flex">

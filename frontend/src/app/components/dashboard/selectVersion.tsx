@@ -15,13 +15,14 @@ export default function SelectVersion({ versions, productId }: { versions: Versi
       setSelectedVersion(versions[versions.length-1])
    }, [versions]);
    const handleVersionSelect = (version: Version) => {
+      console.log("clinking")
       setSelectedVersion(version);
    };
    return (
       <div>
         <div className="version-selector">
             <div className="select animated zoomIn">
-               <input type="radio" name="option"></input>
+               {/* <input type="radio" name="option"></input> */}
                <i className="toggle icon icon-arrow-down"></i>
                <i className="toggle icon icon-arrow-up"></i>
                <span className="placeholder">Choose version...</span>

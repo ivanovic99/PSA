@@ -3,6 +3,8 @@ import axios from 'axios'
 import { API_ROUTE, COOKIE_NAME } from "@/../constants";
 import { cookies } from "next/headers";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: NextRequest) {
    try {
       // -------------------
@@ -19,6 +21,6 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ message: "Success", status: 200, products})
    } catch(err) {
       console.log(err)
-      return NextResponse.json({ message: "Error", status: 500 })
+      return NextResponse.json({ message: "Error", status: 500, err })
    }
 }

@@ -3,6 +3,8 @@ import axios from 'axios'
 import { API_ROUTE, COOKIE_NAME } from "@/../constants";
 import { cookies } from "next/headers";
 
+export const dynamic = 'force-dynamic';
+
 export async function PUT(req: NextRequest) {
    try {
       const product = await req.json();

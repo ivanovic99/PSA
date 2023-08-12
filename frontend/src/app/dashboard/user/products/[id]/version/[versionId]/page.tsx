@@ -52,7 +52,7 @@ export default function Version() {
                
                <form>
                   <div className="formbold-form-title">
-                     <h2 className="">Version {version?.versionNumber}'s details</h2>
+                     <h2 className="">Version {version?.versionNumber}&apos;s details</h2>
                   </div>
                   <br />
                   <div>
