@@ -7,6 +7,7 @@ import { Product } from '@/../types/product';
 import { useEffect, useState } from 'react';
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default function IndexPage({
   searchParams,
