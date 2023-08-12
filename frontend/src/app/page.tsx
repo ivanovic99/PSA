@@ -4,8 +4,13 @@ import Modal from 'react-modal'
 import { useState } from 'react'
 import Link from 'next/link';
 import './modal.css'
+import { useAppSelector } from "@/redux/store";
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+   const user = useAppSelector((state) => state.persistedReducer.value)
+   const router = useRouter();
+   if (user.loggedIn) router.push('/dashboard/user/clients')
    const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
    const [isSignInModalOpen, setIsSignInModalOpen] = useState(false)
 
