@@ -1,4 +1,3 @@
-'use client'
 import { NextResponse } from 'next/server'
 import { serialize } from "cookie";
 import axios from 'axios' 
@@ -8,9 +7,7 @@ export async function POST(req: Request) {
    try {
       const body = await req.json()
       const APIRoute = process.env.API_ROUTE ? process.env.API_ROUTE : API_ROUTE
-      console.log(APIRoute + "/admin/login    body:", body)
       const { token, user } = (await axios.post(APIRoute + "/admin/login", body)).data
-      console.log("token and user: ", token, user)
       const seralized = serialize(COOKIE_NAME, token, {
          httpOnly: true,
          secure: process.env.NODE_ENV !== "development",
