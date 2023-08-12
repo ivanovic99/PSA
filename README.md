@@ -1,4 +1,4 @@
-# AninfoTPFinal
+# Analisis de la Informacion TP Final
 
 Final work for subject Analisis de la Informacion
 
