@@ -15,6 +15,7 @@ export default function SelectVersion({ versions, productId }: { versions: Versi
       setSelectedVersion(versions[versions.length-1])
    }, [versions]);
    const handleVersionSelect = (version: Version) => {
+      console.log("clinking")
       setSelectedVersion(version);
    };
    return (
