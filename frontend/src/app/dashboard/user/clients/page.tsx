@@ -5,15 +5,11 @@ import UsersTable from '../../../components/dashboard/table';
 import AddButton from '@/app/components/dashboard/addButton';
 import { useEffect, useState } from 'react';
 import { Client } from '@/../types/client';
+import { useSearchParams } from "next/navigation";
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const dynamic = 'force-dynamic'
 
-export default function Clients({
-  searchParams,
-}: {
-  searchParams: { q: string };
-}) {
+export default function Clients() {
    const [clients, setClients] = useState<Client[]>([]);
    useEffect(() => {
       
@@ -23,15 +19,12 @@ export default function Clients({
       })()
       
    }, []);
-   const search = searchParams.q ?? '';
+   const searchParams = useSearchParams()
+   const search = searchParams.get('q') ?? '';
    var filteredClients = [] as Client[]
    var filtered = false
-   console.log("----------------")
-   console.log("----------------")
    if (search) {
-      console.log("Inside the if. Search:", search)
       filteredClients = (clients?.filter((client) => {
-            console.log("Inside the filter. client:", client)
             if (client.name.toLowerCase().includes(search.toLowerCase())) {
                return true;
             }
@@ -39,9 +32,6 @@ export default function Clients({
          }) as Client[]);
       filtered = true
    }
-   console.log("filtered", filtered)
-   console.log("clients", clients)
-   console.log("filteredClients", filteredClients)
 
    return (
       <main className="p-4 md:p-10 mx-auto max-w-7xl">

@@ -5,15 +5,11 @@ import ProductsTable from '@/app/components/dashboard/table';
 import AddButton from '@/app/components/dashboard/addButton';
 import { Product } from '@/../types/product';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from "next/navigation";
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const dynamic = 'force-dynamic'
 
-export default function IndexPage({
-  searchParams,
-}: {
-  searchParams: { q: string };
-}) {
+export default function Products() {
 
    const [products, setProducts] = useState<Product[]>([]);
    useEffect(() => {
@@ -24,7 +20,8 @@ export default function IndexPage({
       })()
       
    }, []);
-   const search = searchParams.q ?? '';
+   const searchParams = useSearchParams()
+   const search = searchParams.get('q') ?? '';
    var filteredProducts = [] as Product[]
    var filtered = false
    if (products && search) {
