@@ -20,6 +20,7 @@ export default function SignInAdmin() {
                password: e.target.password.value,
                adminKey: e.target.adminKey.value
             })})
+         if (!res.ok) console.log("!res.ok:", res)
          const { user, message } = await res.json()
          if (message) {
             alert("Incorrect username or password")
