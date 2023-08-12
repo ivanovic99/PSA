@@ -26,8 +26,12 @@ export default function Clients({
    const search = searchParams.q ?? '';
    var filteredClients = [] as Client[]
    var filtered = false
+   console.log("----------------")
+   console.log("----------------")
    if (search) {
+      console.log("Inside the if. Search:", search)
       filteredClients = (clients?.filter((client) => {
+            console.log("Inside the filter. client:", client)
             if (client.name.toLowerCase().includes(search.toLowerCase())) {
                return true;
             }
@@ -35,6 +39,8 @@ export default function Clients({
          }) as Client[]);
       filtered = true
    }
+   console.log("filtered", filtered)
+   console.log("clients", clients)
    console.log("filteredClients", filteredClients)
 
    return (
