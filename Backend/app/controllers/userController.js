@@ -20,7 +20,7 @@ async function loginUser(req, res, next, err, user, info) {
       req.login(user, { session: false }, async (error) => {
          if (error) return next(error)
          const body = { _id: user._id, email: user.email, username: user.username };
-         const token = jwt.sign({ user: body }, process.env.JWT_SECRET);
+         const token = jwt.sign({ user: body }, process.env.JWT_SECRET || "my_secret_jwt");
          return res.json({ token, id: user._id });
       });
    } catch (error) {

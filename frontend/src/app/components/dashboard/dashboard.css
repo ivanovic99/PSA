@@ -1,0 +1,23 @@
+.addClientButton {
+   border-width: 2px;
+   background-color: #1F2937;
+   border-color: #2D3748;
+   border-radius: 0.375rem;
+   padding-left: 1rem;
+   padding-right: 1rem;
+   padding-top: 0.5rem;
+   padding-bottom: 0.5rem;
+   margin-top: 1.75rem;
+   color: #CBD5E0;
+   cursor: pointer;
+
+ }
+
+.addClientButton:hover {
+   background-color: #6B7280;
+   color: #CBD5E0;
+ }
+
+.fixed-width-cell {
+   width: 200px; /* Set your desired width here */
+}

@@ -28,7 +28,7 @@ passport.use('loginAdmin', new LocalStrategy({
       const email = req.body.email;
       const adminKey = req.body.adminKey;
       try {
-         const admin = email == "undefined" ? await Admin.findOne({ username }) : await Admin.findOne({ email });
+         const admin = email === undefined ? await Admin.findOne({ username }) : await Admin.findOne({ email });
          if (!admin) {
             return done(null, false, { message: 'Admin not found' });
          }
@@ -63,7 +63,7 @@ passport.use('loginUser', new LocalStrategy({
       username = req.body.username;
       const email = req.body.email;
       try {
-         const user = email == "undefined" ? await User.findOne({ username }) : await User.findOne({ email });     
+         const user = email === undefined ? await User.findOne({ username }) : await User.findOne({ email });     
          if (!user) {
             return done(null, false, { message: 'User not found' });
          }

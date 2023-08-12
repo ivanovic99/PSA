@@ -20,8 +20,8 @@ async function loginAdmin(req, res, next, err, user, info) {
       req.login(user, { session: false }, async (error) => {
          if (error) return res.status(500).json(error)
          const body = { _id: user._id, email: user.email, username: user.username };
-         const token = jwt.sign({ user: body }, process.env.JWT_SECRET);
-         return res.json({ token, id: user._id, message: 'Login successful. Welcome admin ' + user.username + '!' });
+         const token = jwt.sign({ user: body }, process.env.JWT_SECRET || "my_secret_jwt");
+         return res.json({ token, id: user._id, message: 'Login successful. Welcome admin ' + user.username + '!', user });
       });
    } catch (error) {
       return res.status(500).json(error);
@@ -59,7 +59,7 @@ async function updateAdminById(req, res) {
    try {
       const adminId = req.user._id;
       if (req.params.id !== adminId) {
-         return res.status(401).json({ error: 'Unauthorized' });
+         return res.status(401).json({ error: 'Unauthorized, ids do not match' });
       }
       const { username, email, adminKey, password, name, lastname, age, nationality, address, phone } = req.body;
       const updateAdminById = await Admin.findByIdAndUpdate(adminId, 

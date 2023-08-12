@@ -47,12 +47,16 @@ ProductSchema.methods.removeVersion = async function (versionId) {
 
 
 ProductSchema.post("findOneAndDelete", async function(deletedProduct, next) {
-   if (deletedProduct) {
-      await Version.deleteMany({
-         product: deletedProduct._id
-      });
+   try {
+      if (deletedProduct) {
+         await Version.deleteMany({
+            product: deletedProduct._id
+         });
+      }
+      next();
+   } catch(error) {
+      console.log(error);
    }
-   next();
  });
 
 module.exports = mongoose.model('Product', ProductSchema);
