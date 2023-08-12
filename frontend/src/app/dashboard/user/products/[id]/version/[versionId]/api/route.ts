@@ -3,6 +3,8 @@ import axios from 'axios'
 import { API_ROUTE, COOKIE_NAME } from "@/../constants";
 import { cookies } from "next/headers";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: NextRequest, context: { params: any }) {
    try {
       const APIRoute = process.env.API_ROUTE ? process.env.API_ROUTE : API_ROUTE

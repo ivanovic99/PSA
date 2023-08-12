@@ -2,6 +2,8 @@ import { NextResponse  } from 'next/server'
 import { serialize } from 'cookie'
 import { COOKIE_NAME } from '../../../../../constants'
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
    
    const seralized = serialize(COOKIE_NAME, "", {

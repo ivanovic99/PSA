@@ -2,6 +2,8 @@ import { cookies } from "next/headers";
 import { COOKIE_NAME } from "../../../../../constants";
 import { NextResponse } from "next/server";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
    try {
       const cookieStore = cookies()
