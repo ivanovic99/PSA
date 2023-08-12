@@ -32,3 +32,10 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+## DB API
+This project connects to a DB API that must be manually set up. The API URL must be decleared in the `.env.local` file as `API_ROUTE`. The endpoints that are used are the ones in the routes folder found in the backend. If you are using the localhost, there is a default API_ROUTE decleared in the constants folder with the value `https://localhost:8080/api`. Note that the `/api` is included in the default value. If you are using a different port, you must change set the `API_ROUTE` in the `.env.local` file to the correct port (and add the /api at the end <u>always</u>).
+REMEMBER TO NOT COMMIT THE `.env.local` FILE TO THE REPO (IT IS BEING IGNORE IN THE .gitignore FILE, DO NOT CHANGE THAT).
+
+
