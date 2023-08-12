@@ -16,7 +16,6 @@ export async function GET(req: NextRequest) {
       const products = (await axios.get(APIRoute + "/product",
       { params: { secret_token } }
       )).data
-      console.log(products)
       return NextResponse.json({ message: "Success", status: 200, products})
    } catch(err) {
       console.log(err)
