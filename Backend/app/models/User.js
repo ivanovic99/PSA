@@ -57,9 +57,13 @@ UserSchema.pre('findOneAndUpdate', async function (next) {
 });
 
 UserSchema.methods.isValidPassword = async function (password) {
-   const user = this;
-   const compare = await bcrypt.compare(password, user.password);
-   return compare;
+   try {
+      const user = this;
+      const compare = await bcrypt.compare(password, user.password);
+      return compare;
+   } catch (error) {
+      console.log(error);
+   }
 };
 
 
@@ -68,10 +72,14 @@ module.exports = mongoose.model('User', UserSchema);
 
 
 async function hashPassword(password) {
-   var mySalt = +process.env.SALT_WORK_FACTOR || 10;
-   var err, salt = await bcrypt.genSalt(mySalt);
-   if (err) throw (err);
-   var err, passwordHash = await bcrypt.hash(password, salt);
-   if (err) throw (err);
-   return passwordHash;
+   try {
+      var mySalt = +process.env.SALT_WORK_FACTOR || 10;
+      var err, salt = await bcrypt.genSalt(mySalt);
+      if (err) throw (err);
+      var err, passwordHash = await bcrypt.hash(password, salt);
+      if (err) throw (err);
+      return passwordHash;
+   } catch (error) {
+      console.log(error);
+   }
 }
