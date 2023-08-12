@@ -1,5 +1,5 @@
 // import { NextResponse } from 'next/server'
-// import type { NextRequest } from 'next/server'
+import type { NextRequest } from 'next/server'
 // import { COOKIE_NAME } from "./constants";
 
 // // This function can be marked `async` if using `await` inside
@@ -30,3 +30,5 @@
 // export const config = {
 //   matcher: '/dashboard/:path*',
 // }
+
+export function middleware(request: NextRequest) {}
