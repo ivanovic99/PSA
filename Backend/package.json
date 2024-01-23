@@ -5,7 +5,7 @@
    "main": "index.js",
    "scripts": {
       "test": "cd tests && node clean.js && npx cucumber-js ./features --require ./step_definitions --require hooks.js",
-      "start": "nodemon index.js",
+      "start": "nodemon --no-deprecation index.js",
       "clean": "rm -rf node_modules"
    },
    "repository": "git+ssh://git@github.com/ivanovic99/PSA.git",

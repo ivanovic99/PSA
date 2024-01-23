@@ -60,16 +60,31 @@ export default function Navbar() {
                <div className="flex h-16 justify-between">
                   <div className="flex">
                      <div className="flex flex-shrink-0 items-center">
-                        <Link href="/dashboard/user/clients">
-                           <Image
-                              src="/forestLogo.svg"
-                              alt="Vercel Logo"
-                              className="dark:invert w-10 h-10 "
-                              width={2}
-                              height={2}
-                              blurDataURL={'/forestLogo.svg'}
-                           />
-                        </Link>
+                        {
+                           user && user.isAdmin ? (
+                              <Link href="/dashboard/admin">
+                                 <Image
+                                    src="/forestLogo.svg"
+                                    alt="Vercel Logo"
+                                    className="dark:invert w-10 h-10 "
+                                    width={2}
+                                    height={2}
+                                    blurDataURL={'/forestLogo.svg'}
+                                 />
+                              </Link>
+                           ) : (
+                              <Link href="/dashboard/user">
+                                 <Image
+                                    src="/forestLogo.svg"
+                                    alt="Vercel Logo"
+                                    className="dark:invert w-10 h-10 "
+                                    width={2}
+                                    height={2}
+                                    blurDataURL={'/forestLogo.svg'}
+                                 />
+                              </Link>
+                           )
+                        }
                      </div>
                      <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
                         {navigation.map((item) => (
