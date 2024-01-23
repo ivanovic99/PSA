@@ -18,13 +18,13 @@ async function startServer() {
       // Initialize the Server
       const app = express();
    
+      const dbUrlStore = process.env.dbUrlStore // Go to mongoDB Atlas, create a new cluster and get the connection string! (Youtube might help you...)
       app.use(session({
          secret: process.env.SESSION_SECRET || "my_secret_session",
          resave: false,
          saveUninitialized: false,
          store: MongoStore.create({
-            client: db.getClient(),
-            // mongoUrl: dbUrlStore,
+            mongoUrl: dbUrlStore,
             // mongoOptions: advancedOptions
           })
       }))
