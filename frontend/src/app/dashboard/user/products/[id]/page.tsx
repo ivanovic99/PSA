@@ -97,6 +97,24 @@ export default function Settings() {
                         )}
                      />
                   </div>
+                  <div className=''>
+                     <label htmlFor="price" className="formbold-form-label"> Price </label>
+                     <input
+                        type="price"
+                        name="price"
+                        id="price"
+                        className="formbold-form-input"
+                        value={product?.price}
+                        placeholder={"Please enter the price"}
+                        onChange={(e) => setProduct(state =>
+                           ({
+                              ...state, ...{
+                                    price: e.target.value,
+                              } as unknown as Product
+                           })
+                        )}
+                     />
+                  </div>
                   <br />
                   <div className="formbold-mb-3">
                      <SelectVersion versions={product.versions} productId={product._id}/>

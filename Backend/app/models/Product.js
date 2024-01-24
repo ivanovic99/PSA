@@ -14,6 +14,8 @@ const ProductSchema = new mongoose.Schema({
    updatedAt: { type: Date, default: Date.now },
 
    versions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Version' }],
+   
+   price: { type: Number, required: true },
 
 }, options);
 

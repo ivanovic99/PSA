@@ -5,4 +5,5 @@ export interface Product {
    name: string;
    versions: Version[];
    description: string;
+   price: number;
  }

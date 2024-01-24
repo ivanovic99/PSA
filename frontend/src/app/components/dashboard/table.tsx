@@ -91,6 +91,7 @@ export default function UsersTable({ users, products }: { users: User[] | Client
                         <TableHeaderCell className='fixed-width-cell'>Name</TableHeaderCell>
                         <TableHeaderCell className='fixed-width-cell'>Description</TableHeaderCell>
                         <TableHeaderCell className='fixed-width-cell'>Latest Version</TableHeaderCell>
+                        <TableHeaderCell className='fixed-width-cell'>Price</TableHeaderCell>
                      </TableRow>
                   </TableHead>
                   <TableBody>
@@ -102,6 +103,9 @@ export default function UsersTable({ users, products }: { users: User[] | Client
                            </TableCell>
                            <TableCell className='fixed-width-cell'>
                               <Text>{product.versions.at(-1)?.versionNumber}</Text>
+                           </TableCell>
+                           <TableCell className='fixed-width-cell'>
+                              <Text>{product.price}</Text>
                            </TableCell>
                            <TableCell className='w-0 hover:underline text-blue-500'>
                                  <Link href={`/dashboard/user/products/${product._id}`}>

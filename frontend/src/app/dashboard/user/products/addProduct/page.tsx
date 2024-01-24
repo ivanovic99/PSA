@@ -20,6 +20,7 @@ export default function Settings(this: any) {
    const [ name, setName ] = useState<string>("")   
    const [ description, setDescription ] = useState<string>("")
    const [ customization, setCustomization ] = useState<string>("")
+   const [ price, setPrice ] = useState<string>("")
    
    const addProduct = async (e: any) => {
       e.preventDefault()
@@ -27,6 +28,7 @@ export default function Settings(this: any) {
          name,
          description,
          customization,
+         price,
       }
       setIsLoading(true)
       await fetch('./addProduct/api', {
@@ -84,6 +86,18 @@ export default function Settings(this: any) {
                         value={customization}
                         placeholder={"Please enter the customization"}
                         onChange={(e) => setCustomization(e.target.value)}
+                     />
+                  </div>
+                  <div>
+                     <label htmlFor="price" className="formbold-form-label"> price </label>
+                     <input
+                        type="number"
+                        name="price"
+                        id="price"
+                        className="formbold-form-input placeholder:text-[13px]"
+                        value={price}
+                        placeholder={"Please enter the price"}
+                        onChange={(e) => setPrice(e.target.value)}
                      />
                   </div>
                   <button className="formbold-btn" type='button' onClick={handleOpenAddProductModal}>Add Product</button>

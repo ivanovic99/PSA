@@ -13,8 +13,8 @@ async function getAllProducts(req, res) {
 // Add new product
 async function addProduct(req, res) {
    try {
-      const { name, description, customization } = req.body;
-      const product = await Product.create({ name, description });
+      const { name, description, customization, price } = req.body;
+      const product = await Product.create({ name, description, price });
       const updatedProduct = await product.addVersion("1.0.0", customization);
       res.status(201).json({ newProduct: updatedProduct });
    } catch (error) {
@@ -44,8 +44,8 @@ async function getProductById(req, res) {
 async function updateProductById(req, res) {
    try {
       const { id } = req.params;
-      const { name, description } = req.body;
-      const product = await Product.findByIdAndUpdate(id, { name, description }, { new: true }).populate('versions');
+      const { name, description, price } = req.body;
+      const product = await Product.findByIdAndUpdate(id, { name, description, price }, { new: true }).populate('versions');
       if (!product) {
          return res.status(404).json({ message: 'Product not found!' });
       }
