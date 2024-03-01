@@ -4,7 +4,7 @@ require('dotenv').config();
 const connectToDatabase = async () => {
 
    try {
-      const dbUrl = process.env.MONGODB_URI; // Go to mongoDB Atlas, create a new cluster and get the connection string! (Youtube might help you...)
+      const dbUrl = process.env.MONGODB_URI || 'mongodb://mongo:27017/'; // Go to mongoDB Atlas, create a new cluster and get the connection string! (Youtube might help you...)
       await mongoose.connect(dbUrl, {
          useNewUrlParser: true,
          useUnifiedTopology: true,

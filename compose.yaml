@@ -1,0 +1,28 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./frontend
+    image: ivanovic99/psa-frontend
+    ports:
+      - 3000:3000
+    depends_on:
+      - server
+  server:
+    build:
+      context: ./Backend
+    image: ivanovic99/psa-backend
+    environment:
+      NODE_ENV: development
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+volumes:
+  mongo-data:

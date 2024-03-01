@@ -1,0 +1,31 @@
+services:
+  server:
+    build:
+      context: .
+    environment:
+      NODE_ENV: development
+      PORT: 8080
+      SESSION_SECRET: 'my_session_secret'
+      JWT_SECRET: 'my_jwt_secret'
+      SALT_WORK_FACTOR: 10
+      MONGODB_URI: 'mongodb://mongo:27017/' # It is the name of the service in the docker-compose file
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+volumes:
+  mongo-data:
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: root
+    #   MONGO_INITDB_ROOT_PASSWORD: example
+    # healthcheck:
+    #   test: echo 'db.stats().ok' | mongo localhost:27017/test --quiet
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 5
